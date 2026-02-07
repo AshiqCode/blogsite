@@ -11,14 +11,14 @@ function safeText(v) {
 }
 
 function buildDescription(post) {
-  if (!post) return "Read this blog post on MiniBlog.";
+  if (!post) return "Read this blog post on TrendScope.";
   const excerpt = safeText(post.excerpt);
   if (excerpt) return excerpt.slice(0, 160);
 
   const content = safeText(post.content);
   if (content) return content.slice(0, 160);
 
-  return "Read this blog post on MiniBlog.";
+  return "Read this blog post on .";
 }
 
 export default function PostDetails() {
@@ -59,10 +59,10 @@ export default function PostDetails() {
   );
 
   // Default SEO (even during loading/error)
-  const defaultTitle = "MiniBlog - Blog Post";
-  const defaultDescription = "Read blog posts on MiniBlog.";
+  const defaultTitle = "TrendScope - Blog Post";
+  const defaultDescription = "Read blog posts on TrendScope.";
 
-  const pageTitle = post?.title ? `${post.title} | MiniBlog` : defaultTitle;
+  const pageTitle = post?.title ? `${post.title} | TrendScope` : defaultTitle;
   const description = post ? buildDescription(post) : defaultDescription;
 
   const Seo = () => (

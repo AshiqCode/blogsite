@@ -5,7 +5,7 @@ export default function Navbar() {
   return (
     <header className="navbar">
       <div className="container navbar-inner">
-        <div className="brand">MiniBlog</div>
+        <div className="brand">TrendScope</div>
         <nav className="nav-links">
           <NavLink
             to="/"

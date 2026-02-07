@@ -9,7 +9,7 @@ export default function Home() {
   const [error, setError] = useState("");
 
   const canonical = useMemo(() => `${window.location.origin}/`, []);
-  const title = "MiniBlog - Latest Blogs";
+  const title = "TrendScope - Latest Blogs";
   const description =
     "Read insights, stories, and ideas written by our team. Explore our latest content and trending articles.";
 
