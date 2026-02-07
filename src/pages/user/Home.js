@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
+import { Helmet } from "react-helmet-async";
 import { getPosts } from "../../api/api";
 import PostCard from "../../components/PostCard";
 
@@ -6,6 +7,11 @@ export default function Home() {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+
+  const canonical = useMemo(() => `${window.location.origin}/`, []);
+  const title = "MiniBlog - Latest Blogs";
+  const description =
+    "Read insights, stories, and ideas written by our team. Explore our latest content and trending articles.";
 
   useEffect(() => {
     let mounted = true;
@@ -17,7 +23,7 @@ export default function Home() {
         const data = await getPosts();
         if (mounted) setPosts(Array.isArray(data) ? data : []);
       } catch (e) {
-        if (mounted) setError(e.message || "Failed to load posts.");
+        if (mounted) setError(e?.message || "Failed to load posts.");
       } finally {
         if (mounted) setLoading(false);
       }
@@ -28,25 +34,65 @@ export default function Home() {
     };
   }, []);
 
-  /* =========================
-     FULL SCREEN LOADER
-     ========================= */
+  // SEO tags render even during loading/error
+  const Seo = () => (
+    <Helmet>
+      <title>{title}</title>
+      <meta name="description" content={description} />
+      <link rel="canonical" href={canonical} />
+
+      {/* Open Graph */}
+      <meta property="og:title" content={title} />
+      <meta property="og:description" content={description} />
+      <meta property="og:url" content={canonical} />
+      <meta property="og:type" content="website" />
+
+      {/* Twitter */}
+      <meta name="twitter:card" content="summary" />
+    </Helmet>
+  );
+
+  // Better “loading” HTML (less empty for crawlers)
   if (loading) {
     return (
-      <div className="fullscreen-loader">
-        <div className="spinner" />
-        <div className="muted" style={{ marginTop: 12 }}>
-          Loading posts…
-        </div>
-      </div>
+      <main style={{ width: "100%", overflowX: "hidden" }}>
+        <Seo />
+
+        <section
+          style={{
+            minHeight: "60vh",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            textAlign: "center",
+            padding: "60px 20px",
+          }}
+        >
+          <div style={{ maxWidth: 720 }}>
+            <h1
+              style={{ fontSize: "clamp(28px, 5vw, 42px)", marginBottom: 10 }}
+            >
+              Discover Thoughtful Blogs
+            </h1>
+            <p className="muted" style={{ lineHeight: 1.6 }}>
+              Loading latest posts…
+            </p>
+
+            {/* Keep your spinner if you want */}
+            <div style={{ marginTop: 16 }}>
+              <div className="spinner" />
+            </div>
+          </div>
+        </section>
+      </main>
     );
   }
 
   return (
     <main style={{ width: "100%", overflowX: "hidden" }}>
-      {/* =========================
-          LANDING / HERO SECTION
-         ========================= */}
+      <Seo />
+
+      {/* HERO */}
       <section
         style={{
           minHeight: "75vh",
@@ -101,9 +147,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* =========================
-          BLOG LIST SECTION
-         ========================= */}
+      {/* BLOG LIST */}
       <section
         id="blogs"
         style={{
@@ -114,7 +158,7 @@ export default function Home() {
       >
         <div style={{ marginBottom: 32 }}>
           <h2 style={{ fontSize: 28, marginBottom: 6 }}>Latest Blogs</h2>
-          <p style={{ color: "#6b7280" }}>Fresh articles curated for you.</p>
+          <h3 style={{ color: "#6b7280" }}>Fresh articles curated for you.</h3>
         </div>
 
         {error ? (
