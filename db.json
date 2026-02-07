@@ -1,0 +1,106 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "Getting Started with React Router",
+      "slug": "getting-started-with-react-router",
+      "content": "React Router lets you build multi-page experiences in a single-page app.\n\nIn this post, we cover installing react-router-dom, creating routes, and linking between pages.\n\nFinally, we'll add a dynamic route like /post/:slug and show a not-found state.",
+      "excerpt": "Learn how to set up React Router, create routes, and build a basic SPA navigation.",
+      "coverImage": "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1600&q=60",
+      "author": "Ayesha Khan",
+      "category": "React",
+      "tags": [
+        "react",
+        "router",
+        "spa"
+      ],
+      "createdAt": "2026-01-15T10:00:00.000Z",
+      "updatedAt": "2026-01-15T10:00:00.000Z"
+    },
+    {
+      "id": 2,
+      "title": "Building a Simple Blog with JSON Server",
+      "slug": "building-a-simple-blog-with-json-server",
+      "content": "JSON Server gives you a quick REST API from a JSON file.\n\nWe'll create db.json, run json-server on port 3001, and connect from React using fetch.\n\nYou'll learn basic endpoints: GET, POST, PUT, DELETE.",
+      "excerpt": "Use JSON Server as a mock backend and build full CRUD endpoints quickly.",
+      "coverImage": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1600&q=60",
+      "author": "Bilal Ahmed",
+      "category": "Backend",
+      "tags": [
+        "json-server",
+        "crud",
+        "api"
+      ],
+      "createdAt": "2026-01-20T12:00:00.000Z",
+      "updatedAt": "2026-01-20T12:00:00.000Z"
+    },
+    {
+      "id": 3,
+      "title": "Writing Better CSS for Clean Layouts",
+      "slug": "writing-better-css-for-clean-layouts",
+      "content": "Good CSS starts with spacing, typography, and a consistent layout system.\n\nWe'll build a responsive grid for blog cards and a readable post detail page.\n\nAlso: simple utility classes for muted text, badges, and buttons.",
+      "excerpt": "A practical CSS checklist for spacing, typography, and responsive layout.",
+      "coverImage": "https://images.unsplash.com/photo-1523437113738-bbd3cc89fb19?auto=format&fit=crop&w=1600&q=60",
+      "author": "Sana Riaz",
+      "category": "CSS",
+      "tags": [
+        "css",
+        "responsive",
+        "layout"
+      ],
+      "createdAt": "2026-01-26T09:30:00.000Z",
+      "updatedAt": "2026-01-26T09:30:00.000Z"
+    },
+    {
+      "id": 4,
+      "title": "Slugify Titles the Right Way",
+      "slug": "slugify-titles-the-right-way",
+      "content": "A slug is a URL-friendly version of a title.\n\nWe'll remove special characters, lowercase everything, and replace spaces with hyphens.\n\nThen we\u2019ll enforce uniqueness on the admin side with a warning.",
+      "excerpt": "Generate clean, URL-friendly slugs and avoid duplicates in your UI.",
+      "coverImage": "https://images.unsplash.com/photo-1526378722484-bd91ca387e72?auto=format&fit=crop&w=1600&q=60",
+      "author": "Ayesha Khan",
+      "category": "React",
+      "tags": [
+        "slug",
+        "react",
+        "validation"
+      ],
+      "createdAt": "2026-01-30T15:15:00.000Z",
+      "updatedAt": "2026-01-30T15:15:00.000Z"
+    },
+    {
+      "id": 5,
+      "title": "Admin CRUD UX: Forms, Validation, and Feedback",
+      "slug": "admin-crud-ux-forms-validation-and-feedback",
+      "content": "A usable admin panel needs helpful feedback.\n\nWe'll add required validation for title/content/author/category, disable submit while saving, and confirm deletes.\n\nWe\u2019ll also handle server-down errors with friendly messaging.",
+      "excerpt": "Make admin CRUD practical: validation, loading states, and delete confirmations.",
+      "coverImage": "https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=1600&q=60",
+      "author": "Bilal Ahmed",
+      "category": "UX",
+      "tags": [
+        "admin",
+        "crud",
+        "validation"
+      ],
+      "createdAt": "2026-02-02T11:00:00.000Z",
+      "updatedAt": "2026-02-02T11:00:00.000Z"
+    },
+    {
+      "id": 6,
+      "title": "Suggestion Algorithms for Related Posts",
+      "slug": "suggestion-algorithms-for-related-posts",
+      "content": "Related posts keep users engaged.\n\nWe'll prefer posts from the same category, then add tag overlap scoring.\n\nIf not enough matches exist, we fill the remainder with the latest posts.",
+      "excerpt": "Implement a simple related-posts system using category + tag overlap scoring.",
+      "coverImage": "https://images.unsplash.com/photo-1516321497487-e288fb19713f?auto=format&fit=crop&w=1600&q=60",
+      "author": "Sana Riaz",
+      "category": "React",
+      "tags": [
+        "recommendations",
+        "tags",
+        "react"
+      ],
+      "createdAt": "2026-02-05T08:45:00.000Z",
+      "updatedAt": "2026-02-05T08:45:00.000Z"
+    }
+  ]
+}
