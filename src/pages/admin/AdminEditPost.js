@@ -42,7 +42,9 @@ export default function AdminEditPost() {
 
       const slug = slugify(payload.slug || payload.title);
       const isDup = posts.some(
-        (p) => p.id !== Number(id) && String(p.slug).toLowerCase() === slug.toLowerCase()
+        (p) =>
+          p.id !== Number(id) &&
+          String(p.slug).toLowerCase() === slug.toLowerCase()
       );
       if (isDup) {
         setError("Slug already exists. Please use a different slug.");

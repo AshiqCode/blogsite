@@ -79,13 +79,13 @@ export default function AdminDashboard() {
       if (!ok) return;
 
       for (const post of json) {
-        const { id, ...rest } = post; // let Firebase create new IDs
+        const { id, ...rest } = post;
         await createPost(rest);
       }
 
       alert("Backup restored successfully.");
       load();
-    } catch (err) {
+    } catch {
       alert("Failed to restore backup.");
     } finally {
       e.target.value = "";
@@ -112,7 +112,7 @@ export default function AdminDashboard() {
             ⬆ Restore
           </button>
 
-          <Link className="btn" to="/admin/new">
+          <Link className="btn" to="/blogadmincode4/new">
             + Create New Post
           </Link>
 
@@ -126,9 +126,9 @@ export default function AdminDashboard() {
         </div>
       </div>
 
-      {loading ? <div className="loader">Loading…</div> : null}
+      {loading && <div className="loader">Loading…</div>}
 
-      {error ? (
+      {error && (
         <div className="error-box">
           <strong>Oops:</strong> {error}
           <div style={{ marginTop: 8 }}>
@@ -137,13 +137,13 @@ export default function AdminDashboard() {
             </button>
           </div>
         </div>
-      ) : null}
+      )}
 
-      {!loading && !error && posts.length === 0 ? (
+      {!loading && !error && posts.length === 0 && (
         <div className="empty">No posts found.</div>
-      ) : null}
+      )}
 
-      {!loading && !error && posts.length ? (
+      {!loading && !error && posts.length > 0 && (
         <div className="table-wrap">
           <table className="table">
             <thead>
@@ -167,12 +167,14 @@ export default function AdminDashboard() {
                   <td>{new Date(p.createdAt).toLocaleDateString()}</td>
                   <td>
                     <div className="row-actions">
+                      {/* ✅ FIXED EDIT LINK */}
                       <Link
                         className="btn secondary small"
-                        to={`/admin/edit/${p.id}`}
+                        to={`/blogadmincode4/edit/${p.id}`}
                       >
                         Edit
                       </Link>
+
                       <button
                         className="btn danger small"
                         onClick={() => onDelete(p.id)}
@@ -180,6 +182,7 @@ export default function AdminDashboard() {
                       >
                         {busyId === p.id ? "Deleting…" : "Delete"}
                       </button>
+
                       <Link className="btn ghost small" to={`/post/${p.slug}`}>
                         View
                       </Link>
@@ -190,7 +193,7 @@ export default function AdminDashboard() {
             </tbody>
           </table>
         </div>
-      ) : null}
+      )}
     </div>
   );
 }
