@@ -9,9 +9,9 @@ export default function Home() {
   const [error, setError] = useState("");
 
   const canonical = useMemo(() => `${window.location.origin}/`, []);
-  const title = "TrendScope - Latest Blogs";
+  const title = "TrendScope – Latest Blogs, Trends & Expert Insights";
   const description =
-    "Read insights, stories, and ideas written by our team. Explore our latest content and trending articles.";
+    "Read insights, stories, and expert ideas from the TrendScope team. Explore our latest blogs, in-depth articles, and trending topics shaping today.";
 
   useEffect(() => {
     let mounted = true;
