@@ -123,6 +123,23 @@ export default function PostDetails() {
     </Helmet>
   );
 
+  function sharePost() {
+    const url = window.location.href;
+    const title = post?.title || "TrendScope Blog";
+
+    if (navigator.share) {
+      navigator
+        .share({
+          title,
+          url,
+        })
+        .catch(() => {});
+    } else {
+      navigator.clipboard.writeText(url);
+      alert("Link copied to clipboard");
+    }
+  }
+
   async function submitFeedback(e) {
     e.preventDefault();
     if (!post?.id) return;
@@ -224,7 +241,40 @@ export default function PostDetails() {
           </span>
         </div>
 
-        <h1 className="post-title">{post.title}</h1>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            gap: 12,
+            marginTop: 6,
+            marginBottom: 12,
+          }}
+        >
+          <h1 className="post-title" style={{ margin: 0 }}>
+            {post.title}
+          </h1>
+
+          <button
+            onClick={sharePost}
+            title="Share this post"
+            style={{
+              padding: "8px 12px",
+              borderRadius: 8,
+              border: "1px solid rgba(255,255,255,0.15)",
+              background: "rgba(0,0,0,0.35)",
+              color: "#fff",
+              cursor: "pointer",
+              fontSize: 13,
+              display: "flex",
+              alignItems: "center",
+              gap: 6,
+              whiteSpace: "nowrap",
+            }}
+          >
+            🔗 Share
+          </button>
+        </div>
 
         {post.coverImage ? (
           <div className="post-cover">
@@ -251,9 +301,6 @@ export default function PostDetails() {
           </div>
         ) : null}
 
-        {/* =========================
-            FEEDBACK SECTION
-           ========================= */}
         <section
           style={{
             marginTop: 32,
