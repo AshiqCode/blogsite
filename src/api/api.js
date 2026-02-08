@@ -12,17 +12,29 @@ if (!firebase.apps.length) {
 const database = firebase.database();
 const postsRef = database.ref("posts");
 
+const toArrayWithIds = (val) => {
+  const obj = val || {};
+  return Object.entries(obj).map(([id, post]) => ({
+    ...(post || {}),
+    id,
+  }));
+};
+
 export const getPosts = async () => {
   const snapshot = await postsRef.once("value");
-  const data = snapshot.val() || {};
-  return Object.values(data).sort(
-    (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
-  );
+  const list = toArrayWithIds(snapshot.val());
+
+  return list.sort((a, b) => {
+    const ta = new Date(a.createdAt || 0).getTime();
+    const tb = new Date(b.createdAt || 0).getTime();
+    return tb - ta;
+  });
 };
 
 export const getPostById = async (id) => {
   const snapshot = await postsRef.child(id).once("value");
-  return snapshot.val();
+  const post = snapshot.val();
+  return post ? { ...post, id } : null;
 };
 
 export const getPostBySlug = async (slug) => {
@@ -30,15 +42,19 @@ export const getPostBySlug = async (slug) => {
     .orderByChild("slug")
     .equalTo(slug)
     .once("value");
-  const data = snapshot.val();
-  if (!data) return null;
-  return Object.values(data)[0];
+
+  const obj = snapshot.val();
+  if (!obj) return null;
+
+  const [id, post] = Object.entries(obj)[0];
+  return { ...(post || {}), id };
 };
 
 export const createPost = async (post) => {
   const ref = postsRef.push();
-  await ref.set({ ...post, id: ref.key });
-  return { ...post, id: ref.key };
+  const payload = { ...post, id: ref.key };
+  await ref.set(payload);
+  return payload;
 };
 
 export const updatePost = async (id, updatedPost) => {
