@@ -599,33 +599,7 @@ export default function Home() {
               flexWrap: "wrap",
             }}
           >
-            <div style={{ maxWidth: 720 }}>
-              {/* <div
-                style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: 8,
-                  padding: "6px 12px",
-                  borderRadius: 999,
-                  border: "1px solid #d1d5db",
-                  color: "#374151",
-                  fontSize: 13,
-                  marginBottom: 14,
-                  background: "#fff",
-                }}
-              >
-                <span
-                  style={{
-                    width: 8,
-                    height: 8,
-                    borderRadius: 999,
-                    background: "#3b82f6",
-                    display: "inline-block",
-                  }}
-                />
-                AI Tools Directory
-              </div> */}
-
+            <div style={{ maxWidth: 760 }}>
               <h1
                 style={{
                   fontSize: "clamp(34px, 5vw, 54px)",
@@ -633,7 +607,7 @@ export default function Home() {
                   marginBottom: 10,
                 }}
               >
-                Browse {TOOLS.length}+ AI tools
+                Browse {TOOLS.length}+ AI Tools Directory
               </h1>
 
               <p
@@ -641,94 +615,41 @@ export default function Home() {
                   margin: 0,
                   fontSize: 16,
                   color: "#6b7280",
-                  lineHeight: 1.65,
-                  maxWidth: 700,
+                  lineHeight: 1.7,
                 }}
               >
-                Click a tool to visit the official website.
+                Discover the best AI tools, AI apps, and AI software platforms
+                in one place. Click any tool to visit the official website.
               </p>
             </div>
-
-            {/* SEARCH BOX
-            <div
-              style={{
-                width: "100%",
-                maxWidth: 420,
-                padding: 16,
-                borderRadius: 16,
-                border: "1px solid #e5e7eb",
-                background: "#ffffff",
-                boxShadow: "0 10px 25px rgba(0,0,0,0.05)",
-              }}
-            >
-              <input
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-                placeholder="Search (e.g., video, writing, coding)"
-                style={{
-                  width: "100%",
-                  padding: "12px 14px",
-                  borderRadius: 10,
-                  border: "1px solid #d1d5db",
-                  background: "#fff",
-                  color: "#111827",
-                  outline: "none",
-                  fontSize: 14,
-                }}
-              />
-
-              <div style={{ display: "grid", gap: 10, marginTop: 12 }}>
-                <select
-                  value={category}
-                  onChange={(e) => setCategory(e.target.value)}
-                  style={{
-                    width: "100%",
-                    padding: "12px",
-                    borderRadius: 10,
-                    border: "1px solid #d1d5db",
-                    background: "#fff",
-                    color: "#111827",
-                  }}
-                >
-                  {categories.map((c) => (
-                    <option key={c} value={c}>
-                      {c}
-                    </option>
-                  ))}
-                </select>
-
-                <button
-                  type="button"
-                  onClick={() => {
-                    setQuery("");
-                    setCategory("All");
-                  }}
-                  style={{
-                    width: "100%",
-                    padding: "12px",
-                    borderRadius: 10,
-                    border: "1px solid #e5e7eb",
-                    background: "#f3f4f6",
-                    color: "#111827",
-                    fontWeight: 700,
-                    cursor: "pointer",
-                  }}
-                >
-                  Reset
-                </button>
-
-                <div style={{ fontSize: 13, color: "#6b7280" }}>
-                  Showing <strong>{filtered.length}</strong> / {TOOLS.length}
-                </div>
-              </div>
-            </div> */}
           </div>
         </div>
       </section>
 
       {/* GRID */}
-      <section style={{ padding: "50px 20px" }}>
+      <section style={{ padding: "20px" }}>
         <div style={{ maxWidth: 1200, margin: "0 auto" }}>
+          {/* SEO Subheading */}
+          <div style={{ marginBottom: 18 }}>
+            <h2 style={{ margin: 0, fontSize: 22, fontWeight: 800 }}>
+              Best AI Tools by Category
+            </h2>
+            <p
+              style={{
+                marginTop: 8,
+                marginBottom: 0,
+                color: "#6b7280",
+                fontSize: 14,
+                lineHeight: 1.7,
+                maxWidth: 950,
+              }}
+            >
+              Explore AI tools for writing, coding, design, image generation,
+              video editing, SEO optimization, productivity, research,
+              automation, translation, speech recognition, and more.
+            </p>
+          </div>
+
           <div
             style={{
               display: "grid",
@@ -750,7 +671,7 @@ export default function Home() {
                     flexDirection: "column",
                     gap: 14,
                     boxShadow: "0 6px 18px rgba(0,0,0,0.04)",
-                    transition: "all 0.2s ease",
+                    transition: "transform 0.15s ease, box-shadow 0.15s ease",
                   }}
                 >
                   <div
@@ -776,11 +697,7 @@ export default function Home() {
                     <div>
                       <h3 style={{ margin: 0, fontSize: 18 }}>{tool.name}</h3>
                       <div
-                        style={{
-                          marginTop: 4,
-                          fontSize: 12,
-                          color: "#6b7280",
-                        }}
+                        style={{ marginTop: 4, fontSize: 12, color: "#6b7280" }}
                       >
                         {c.primary}
                       </div>
@@ -837,21 +754,159 @@ export default function Home() {
               );
             })}
           </div>
-
-          <footer
+          {/* ✅ SEO-friendly visible keywords (natural, not spam) */}
+          <div
             style={{
-              marginTop: 50,
-              paddingTop: 20,
-              borderTop: "1px solid #e5e7eb",
-              color: "#6b7280",
-              fontSize: 13,
-              display: "flex",
-              justifyContent: "space-between",
-              flexWrap: "wrap",
+              marginTop: 16,
+              padding: 16,
+              borderRadius: 16,
+              background: "rgba(255,255,255,0.9)",
+              border: "1px solid #e5e7eb",
+              boxShadow: "0 10px 25px rgba(0,0,0,0.06)",
             }}
           >
-            <span>© {new Date().getFullYear()} TrendScope</span>
-            <span>Tools listed: {TOOLS.length}</span>
+            <p
+              style={{
+                margin: 0,
+                fontSize: 14,
+                color: "#6b7280",
+                lineHeight: 1.85,
+              }}
+            >
+              TrendScope is a comprehensive <strong>AI tools directory</strong>{" "}
+              featuring the <strong>best AI tools in 2026</strong>, including{" "}
+              <strong>free AI tools</strong>,{" "}
+              <strong>generative AI tools</strong>,{" "}
+              <strong>ChatGPT alternatives</strong>,{" "}
+              <strong>AI writing tools</strong>,{" "}
+              <strong>AI image generators</strong>,{" "}
+              <strong>AI video editors</strong>,{" "}
+              <strong>AI coding assistants</strong>,{" "}
+              <strong>AI SEO tools</strong>,{" "}
+              <strong>AI voice generators</strong>,{" "}
+              <strong>AI productivity apps</strong>, and{" "}
+              <strong>AI automation tools</strong>. Whether you're a student,
+              developer, marketer, business owner, content creator, or startup
+              founder, explore top AI software for research, design,
+              programming, marketing, content creation, and business automation.
+            </p>
+          </div>
+          {/* ✅ Footer upgraded with shadow cards */}
+          <footer style={{ marginTop: 50 }}>
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
+                gap: 16,
+                paddingTop: 20,
+                borderTop: "1px solid #e5e7eb",
+              }}
+            >
+              <div
+                style={{
+                  background: "#ffffff",
+                  border: "1px solid #e5e7eb",
+                  borderRadius: 16,
+                  padding: 16,
+                  boxShadow: "0 10px 25px rgba(0,0,0,0.06)",
+                }}
+              >
+                <div style={{ fontWeight: 800, marginBottom: 6 }}>
+                  TrendScope
+                </div>
+                <div
+                  style={{ color: "#6b7280", fontSize: 13, lineHeight: 1.6 }}
+                >
+                  © {new Date().getFullYear()} TrendScope. Discover the best AI
+                  tools for writing, coding, design, and productivity.
+                </div>
+              </div>
+
+              <div
+                style={{
+                  background: "#ffffff",
+                  border: "1px solid #e5e7eb",
+                  borderRadius: 16,
+                  padding: 16,
+                  boxShadow: "0 10px 25px rgba(0,0,0,0.06)",
+                }}
+              >
+                <div style={{ fontWeight: 800, marginBottom: 6 }}>
+                  Directory Stats
+                </div>
+                <div
+                  style={{ color: "#6b7280", fontSize: 13, lineHeight: 1.6 }}
+                >
+                  Tools listed:{" "}
+                  <strong style={{ color: "#111827" }}>{TOOLS.length}</strong>
+                  <br />
+                  Categories:{" "}
+                  <strong style={{ color: "#111827" }}>
+                    {Math.max(0, categories.length - 1)}
+                  </strong>
+                </div>
+              </div>
+
+              <div
+                style={{
+                  background: "#ffffff",
+                  border: "1px solid #e5e7eb",
+                  borderRadius: 16,
+                  padding: 16,
+                  boxShadow: "0 10px 25px rgba(0,0,0,0.06)",
+                }}
+              >
+                <div style={{ fontWeight: 800, marginBottom: 6 }}>
+                  Popular Tags
+                </div>
+                <div
+                  style={{
+                    display: "flex",
+                    gap: 8,
+                    flexWrap: "wrap",
+                    marginTop: 8,
+                  }}
+                >
+                  {[
+                    "AI Writing",
+                    "AI Image",
+                    "AI Video",
+                    "AI Coding",
+                    "AI SEO",
+                    "AI Voice",
+                    "Productivity",
+                    "Automation",
+                  ].map((t) => (
+                    <span
+                      key={t}
+                      style={{
+                        fontSize: 12,
+                        padding: "6px 10px",
+                        borderRadius: 999,
+                        background: "#f3f4f6",
+                        border: "1px solid #e5e7eb",
+                        color: "#374151",
+                        fontWeight: 700,
+                      }}
+                    >
+                      {t}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            <div
+              style={{
+                marginTop: 14,
+                color: "#6b7280",
+                fontSize: 12,
+                textAlign: "center",
+              }}
+            >
+              Tip: Use the search and category filters to quickly find the best
+              AI apps for your needs.
+            </div>
           </footer>
         </div>
       </section>
