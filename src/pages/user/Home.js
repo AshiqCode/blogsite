@@ -593,7 +593,7 @@ export default function Home() {
         }
         @media (max-width: 420px) {
           .ts-nav-links { gap: 10px !important; }
-          .ts-nav-btn { padding: 5px 10px !important; }
+          .ts-nav-btn { padding:  5px 10px !important; }
         }
       `}</style>
 
