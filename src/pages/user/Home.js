@@ -644,7 +644,7 @@ export default function Home() {
                     .getElementById("about")
                     .scrollIntoView({ behavior: "smooth", block: "start" })
                 }
-                style={{ color: "#333", cursor: "pointer" }}
+                style={{ color: "#333", cursor: "pointer", userSelect: "none" }}
               >
                 About
               </div>
@@ -664,7 +664,7 @@ export default function Home() {
                     .getElementById("contact")
                     .scrollIntoView({ behavior: "smooth", block: "start" })
                 }
-                style={{ color: "#333", cursor: "pointer" }}
+                style={{ color: "#333", cursor: "pointer", userSelect: "none" }}
               >
                 Contact
               </div>
@@ -684,7 +684,7 @@ export default function Home() {
                     .getElementById("privacy")
                     .scrollIntoView({ behavior: "smooth", block: "start" })
                 }
-                style={{ color: "#333", cursor: "pointer" }}
+                style={{ color: "#333", cursor: "pointer", userSelect: "none" }}
               >
                 Policy
               </div>
