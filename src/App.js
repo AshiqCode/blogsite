@@ -4,6 +4,7 @@ import { Toaster } from "react-hot-toast";
 
 import Navbar from "./components/Navbar";
 import AppRoutes from "./routes/AppRoutes";
+import { ToastContainer } from "react-toast";
 
 export default function App() {
   return (
@@ -29,8 +30,9 @@ export default function App() {
 
       <Toaster position="top-right" reverseOrder={false} />
 
-      <Navbar />
+      {/* <Navbar /> */}
       <AppRoutes />
+      <ToastContainer />
     </BrowserRouter>
   );
 }

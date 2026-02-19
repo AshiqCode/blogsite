@@ -46,8 +46,8 @@ export default function Navbar() {
         zIndex: 1000,
         background: "rgba(255,255,255,0.92)",
         borderBottom: "1px solid #e5e7eb",
-        backdropFilter: "blur(10px)",
-        WebkitBackdropFilter: "blur(10px)",
+        // backdropFilter: "blur(10px)",
+        // WebkitBackdropFilter: "blur(10px)",
       }}
     >
       <div
