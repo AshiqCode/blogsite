@@ -1044,7 +1044,7 @@ export default function Home() {
                     My name is <b>Muhammad Ashiq</b>, and I am a student at the
                     University of Lahore Main Campus. I am always open to
                     discussing new projects. I am a professional web developer
-                    with over 2 years of experience in ReactJS and web
+                    with over 3 years of experience in ReactJS and web
                     development.
                   </p>
 
@@ -1057,11 +1057,10 @@ export default function Home() {
                       textAlign: "justify",
                     }}
                   >
-                    My name is <b>Shahab Khan</b>, and I am a professional web
-                    developer with over 3 years of experience. I am currently
-                    working on a new project called TrendScope as our major
-                    project. My friend and I are working together on this
-                    project.
+                    My name is <b>Shahab Khan</b>, and I am a professional
+                    business developer with over 4 years of experience. I am
+                    currently working on a new project called TrendScope. I am
+                    working on this project with my friend M. Ashiq.
                   </p>
                 </div>
               </div>
