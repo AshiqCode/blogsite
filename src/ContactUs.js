@@ -13,7 +13,6 @@ const ContactUs = () => {
   const [loading, setLoading] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
-  // Update isMobile on window resize
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth <= 768);
     window.addEventListener("resize", handleResize);
@@ -27,6 +26,7 @@ const ContactUs = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const { first_name, email, message } = formData;
+
     if (!first_name || !email || !message) {
       toast.error("❌ Please fill out all fields!");
       return;
@@ -38,24 +38,35 @@ const ContactUs = () => {
     }
 
     setLoading(true);
-    emailjs
-      .send(
-        "service_r47rh4n",
-        "template_b71q2a6",
-        formData,
-        "IZeQAt9QusTErsVma"
-      )
-      .then(
-        (response) => {
-          toast.success("Message sent successfully!");
-          setFormData({ first_name: "", email: "", message: "" });
-          setLoading(false);
-        },
-        (error) => {
-          toast.error("❌ Failed to send message. Please try again.");
-          setLoading(false);
-        }
-      );
+
+    const SERVICE_ID = "service_r47rh4n";
+    const PUBLIC_KEY = "IZeQAt9QusTErsVma";
+
+    // ✅ Email 1 — Notify YOU (admin)
+    const sendToAdmin = emailjs.send(
+      SERVICE_ID,
+      "template_b71q2a6",
+      formData,
+      PUBLIC_KEY
+    );
+
+    // ✅ Email 2 — Auto-reply to USER
+    const sendToUser = emailjs.send(
+      SERVICE_ID,
+      "template_gmtcm6j",
+      formData,
+      PUBLIC_KEY
+    );
+
+    Promise.all([sendToAdmin, sendToUser])
+      .then(() => {
+        toast.success("✅ Message sent! Check your inbox for confirmation.");
+        setFormData({ first_name: "", email: "", message: "" });
+      })
+      .catch(() => {
+        toast.error("❌ Failed to send message. Please try again.");
+      })
+      .finally(() => setLoading(false));
   };
 
   return (
@@ -79,7 +90,7 @@ const ContactUs = () => {
           <h2 style={styles.panelTitle}>Get in Touch</h2>
           <p style={styles.panelText}>
             Have a question or want to work together? Send us a message and
-            we’ll get back to you quickly.
+            we'll get back to you quickly.
           </p>
         </div>
 
