@@ -8,7 +8,6 @@ function normalizeCategory(cat) {
   const primary = raw.split(",")[0].trim() || "Other";
   return { raw, primary };
 }
-
 export default function Home() {
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState("All");
