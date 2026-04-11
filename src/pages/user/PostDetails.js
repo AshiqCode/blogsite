@@ -3,10 +3,8 @@ import { Helmet } from "react-helmet-async";
 import { useParams, Link } from "react-router-dom";
 import { getPostBySlug, getPosts } from "../../api/api";
 import SuggestedPosts from "../../components/SuggestedPosts";
-
 import firebase from "firebase/compat/app";
 import "firebase/compat/database";
-
 function safeText(v) {
   return String(v || "")
     .replace(/\s+/g, " ")
