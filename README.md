@@ -32,10 +32,16 @@
   <kbd>
     <img width="100%" alt="TrendScope AI Directory Preview" src="https://github.com/user-attachments/assets/f2cdb7ce-baed-497a-8a12-e21454ffc749" style="border-radius: 10px; border: 1px solid #4F46E5;" />
   </kbd>
-  <p><i>The central hub for modern AI tool discovery.</i></p>
+  
 </div>
 
+### 🎨 Project Preview
 
+<div>
+  <a href="http://trendscope.site" target="_blank">
+    http://trendscope.site
+  </a>
+</div>
 ---
 
 ### 🛠️ Directory Architecture
