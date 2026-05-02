@@ -25,6 +25,8 @@ export const Contact = () => (
   <StaticPage title="Contact" description="Get in touch with the ToolsHub team." path="/contact">
     <p>Have a tool request, bug report or partnership idea? We'd love to hear from you.</p>
     <p>Email: <a href="mailto:muhammadashiq.dev@gmail.com">muhammadashiq.dev@gmail.com</a></p>
+    <p>Email: <a href="mailto:shahabtech135@gmail.com">shahabtech135@gmail.com</a></p>
+
   </StaticPage>
 );
 
