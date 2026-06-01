@@ -9,7 +9,7 @@ export default function ScientificCalculator() {
   const [expr, setExpr] = useState("Math.sqrt(2) * 10");
   const [out, setOut] = useState<string>("");
   const evalExpr = () => {
-    try { // eslint-disable-next-line no-new-func
+    try {
       const v = Function(`"use strict"; return (${expr})`)();
       setOut(String(v));
     } catch { setOut("Error"); }
