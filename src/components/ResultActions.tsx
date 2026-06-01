@@ -17,7 +17,11 @@ export const ResultActions = ({ value, label = "Copy" }: { value: string; label?
   };
   const share = async () => {
     if (navigator.share) {
-      try { await navigator.share({ text: value }); } catch {}
+      try {
+        await navigator.share({ text: value });
+      } catch {
+        return;
+      }
     } else copy();
   };
   return (

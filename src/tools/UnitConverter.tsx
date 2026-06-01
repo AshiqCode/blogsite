@@ -13,7 +13,7 @@ const units: Record<string, Record<string, number>> = {
 };
 
 const convertTemp = (v: number, f: string, t: string) => {
-  let c = f === "Celsius" ? v : f === "Fahrenheit" ? (v - 32) * 5 / 9 : v - 273.15;
+  const c = f === "Celsius" ? v : f === "Fahrenheit" ? (v - 32) * 5 / 9 : v - 273.15;
   return t === "Celsius" ? c : t === "Fahrenheit" ? c * 9 / 5 + 32 : c + 273.15;
 };
 

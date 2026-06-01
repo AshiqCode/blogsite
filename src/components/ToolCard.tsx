@@ -1,9 +1,9 @@
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import type { Tool } from "@/lib/tools-registry";
 
 export const ToolCard = ({ tool }: { tool: Tool }) => (
   <Link
-    to={`/tools/${tool.slug}`}
+    href={`/tools/${tool.slug}`}
     className="group relative flex flex-col gap-2 rounded-xl border border-border bg-card p-5 transition-base hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-elegant"
   >
     <div className="flex items-center justify-between">

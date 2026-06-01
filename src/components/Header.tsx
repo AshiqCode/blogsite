@@ -1,5 +1,8 @@
+"use client";
+
 import { useEffect, useState } from "react";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
 import { Moon, Sun, Search, Wrench } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -8,7 +11,8 @@ import { tools } from "@/lib/tools-registry";
 export const Header = () => {
   const [dark, setDark] = useState(false);
   const [q, setQ] = useState("");
-  const navigate = useNavigate();
+  const router = useRouter();
+  const pathname = usePathname();
 
   useEffect(() => {
     const saved = localStorage.getItem("theme");
@@ -30,15 +34,20 @@ export const Header = () => {
       t.title.toLowerCase().includes(q.toLowerCase()) ||
       t.keywords.some(k => k.includes(q.toLowerCase()))
     );
-    if (match) navigate(`/tools/${match.slug}`);
-    else navigate(`/?q=${encodeURIComponent(q)}`);
+    if (match) router.push(`/tools/${match.slug}`);
+    else router.push(`/?q=${encodeURIComponent(q)}`);
     setQ("");
   };
+
+  const navClass = (href: string, exact = false) =>
+    `px-3 py-2 rounded-md hover:text-primary transition-base ${
+      (exact ? pathname === href : pathname.startsWith(href)) ? "text-primary" : "text-muted-foreground"
+    }`;
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/60 bg-background/80 backdrop-blur-lg">
       <div className="container flex h-16 items-center gap-4">
-        <Link to="/" className="flex items-center gap-2 font-bold text-lg shrink-0">
+        <Link href="/" className="flex items-center gap-2 font-bold text-lg shrink-0">
           <span className="flex h-9 w-9 items-center justify-center rounded-lg gradient-primary text-primary-foreground shadow-glow">
             <Wrench className="h-5 w-5" />
           </span>
@@ -56,9 +65,9 @@ export const Header = () => {
         </form>
 
         <nav className="hidden md:flex items-center gap-1 text-sm">
-          <NavLink to="/" className={({isActive}) => `px-3 py-2 rounded-md hover:text-primary transition-base ${isActive ? "text-primary" : "text-muted-foreground"}`} end>Home</NavLink>
-          <NavLink to="/about" className={({isActive}) => `px-3 py-2 rounded-md hover:text-primary transition-base ${isActive ? "text-primary" : "text-muted-foreground"}`}>About</NavLink>
-          <NavLink to="/contact" className={({isActive}) => `px-3 py-2 rounded-md hover:text-primary transition-base ${isActive ? "text-primary" : "text-muted-foreground"}`}>Contact</NavLink>
+          <Link href="/" className={navClass("/", true)}>Home</Link>
+          <Link href="/about" className={navClass("/about")}>About</Link>
+          <Link href="/contact" className={navClass("/contact")}>Contact</Link>
         </nav>
 
         <Button variant="ghost" size="icon" onClick={toggle} aria-label="Toggle theme">

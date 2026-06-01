@@ -1,4 +1,6 @@
-import { Link } from "react-router-dom";
+"use client";
+
+import Link from "next/link";
 import { categories } from "@/lib/tools-registry";
 
 export const Footer = () => {
@@ -13,17 +15,17 @@ export const Footer = () => {
           <h4 className="font-semibold mb-3 text-sm">Categories</h4>
           <ul className="space-y-2 text-sm text-muted-foreground">
             {categories.slice(0, 5).map(c => (
-              <li key={c.name}><Link to={`/category/${c.name.toLowerCase().replace(/\s+/g, "-")}`} className="hover:text-primary transition-base">{c.name}</Link></li>
+              <li key={c.name}><Link href={`/category/${c.name.toLowerCase().replace(/\s+/g, "-")}`} className="hover:text-primary transition-base">{c.name}</Link></li>
             ))}
           </ul>
         </div>
         <div>
           <h4 className="font-semibold mb-3 text-sm">Company</h4>
           <ul className="space-y-2 text-sm text-muted-foreground">
-            <li><Link to="/about" className="hover:text-primary">About Us</Link></li>
-            <li><Link to="/contact" className="hover:text-primary">Contact</Link></li>
-            <li><Link to="/privacy" className="hover:text-primary">Privacy Policy</Link></li>
-            <li><Link to="/disclaimer" className="hover:text-primary">Disclaimer</Link></li>
+            <li><Link href="/about" className="hover:text-primary">About Us</Link></li>
+            <li><Link href="/contact" className="hover:text-primary">Contact</Link></li>
+            <li><Link href="/privacy" className="hover:text-primary">Privacy Policy</Link></li>
+            <li><Link href="/disclaimer" className="hover:text-primary">Disclaimer</Link></li>
           </ul>
         </div>
         {/* <div>

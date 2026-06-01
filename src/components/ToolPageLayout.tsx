@@ -1,4 +1,5 @@
 import { type ReactNode } from "react";
+import Link from "next/link";
 import { Seo } from "@/components/Seo";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { AdSlot } from "@/components/AdSlot";
@@ -84,9 +85,9 @@ export const ToolPageLayout = ({ tool, example, faq, children }: ToolPageLayoutP
               <ul className="space-y-2 text-sm">
                 {related.map(t => (
                   <li key={t.slug}>
-                    <a href={`/tools/${t.slug}`} className="text-muted-foreground hover:text-primary transition-base flex items-center gap-2">
+                    <Link href={`/tools/${t.slug}`} className="text-muted-foreground hover:text-primary transition-base flex items-center gap-2">
                       <span>{t.icon}</span> {t.title}
-                    </a>
+                    </Link>
                   </li>
                 ))}
               </ul>
