@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Providers } from "./providers";
@@ -36,7 +37,15 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <hthead>
+        <Script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2174158128943381"
+          crossOrigin="anonymous"
+          strategy="afterInteractive"
+        />
+      </head>
+      <ml lang="en" suppressHydrationWarning>
       <body>
         <Providers>
           <div className="flex min-h-screen flex-col">
