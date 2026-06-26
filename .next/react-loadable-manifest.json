@@ -1,302 +1,448 @@
 {
-  "..\\node_modules\\next\\dist\\client\\dev\\hot-reloader\\app\\use-websocket.js -> @vercel/turbopack-ecmascript-runtime/browser/dev/hmr-client/hmr-client.ts": {
-    "id": "..\\node_modules\\next\\dist\\client\\dev\\hot-reloader\\app\\use-websocket.js -> @vercel/turbopack-ecmascript-runtime/browser/dev/hmr-client/hmr-client.ts",
+  "lib/tools-registry.ts -> @/tools/AgeCalculator": {
+    "id": 7043,
     "files": [
-      "static/chunks/_app-pages-browser_node_modules_next_dist_client_dev_noop-turbopack-hmr_js.js"
+      "static/chunks/6266-b7a6764014a18abf.js",
+      "static/chunks/5435.75540c2deff9778c.js",
+      "static/chunks/7043.caf77f49f9a23a27.js"
     ]
   },
-  "lib\\tools-registry.ts -> @/tools/AgeCalculator": {
-    "id": "lib\\tools-registry.ts -> @/tools/AgeCalculator",
+  "lib/tools-registry.ts -> @/tools/AverageCalculator": {
+    "id": 2623,
     "files": [
-      "static/chunks/_app-pages-browser_src_tools_AgeCalculator_tsx.js"
+      "static/chunks/6266-b7a6764014a18abf.js",
+      "static/chunks/5435.75540c2deff9778c.js",
+      "static/chunks/2623.2fed61dfe1c4e119.js"
     ]
   },
-  "lib\\tools-registry.ts -> @/tools/AverageCalculator": {
-    "id": "lib\\tools-registry.ts -> @/tools/AverageCalculator",
+  "lib/tools-registry.ts -> @/tools/Base64EncoderDecoder": {
+    "id": 8935,
     "files": [
-      "static/chunks/_app-pages-browser_src_tools_AverageCalculator_tsx.js"
+      "static/chunks/6266-b7a6764014a18abf.js",
+      "static/chunks/5435.75540c2deff9778c.js",
+      "static/chunks/9750-aed9bc7455b118ea.js",
+      "static/chunks/9405.f95d96df5448dc87.js",
+      "static/chunks/8115.1a1192e776432609.js"
     ]
   },
-  "lib\\tools-registry.ts -> @/tools/Base64EncoderDecoder": {
-    "id": "lib\\tools-registry.ts -> @/tools/Base64EncoderDecoder",
+  "lib/tools-registry.ts -> @/tools/BinaryToDecimal": {
+    "id": 4403,
     "files": [
-      "static/chunks/_app-pages-browser_src_tools_Base64EncoderDecoder_tsx.js"
+      "static/chunks/6266-b7a6764014a18abf.js",
+      "static/chunks/5435.75540c2deff9778c.js",
+      "static/chunks/4403.ff91fb2069d6df38.js"
     ]
   },
-  "lib\\tools-registry.ts -> @/tools/BinaryToDecimal": {
-    "id": "lib\\tools-registry.ts -> @/tools/BinaryToDecimal",
+  "lib/tools-registry.ts -> @/tools/BmiCalculator": {
+    "id": 8062,
     "files": [
-      "static/chunks/_app-pages-browser_src_tools_BinaryToDecimal_tsx.js"
+      "static/chunks/6266-b7a6764014a18abf.js",
+      "static/chunks/5435.75540c2deff9778c.js",
+      "static/chunks/9750-aed9bc7455b118ea.js",
+      "static/chunks/9405.f95d96df5448dc87.js",
+      "static/chunks/8794.64c813b95bc85a2d.js"
     ]
   },
-  "lib\\tools-registry.ts -> @/tools/BmiCalculator": {
-    "id": "lib\\tools-registry.ts -> @/tools/BmiCalculator",
+  "lib/tools-registry.ts -> @/tools/BmiChart": {
+    "id": 822,
     "files": [
-      "static/chunks/_app-pages-browser_src_tools_BmiCalculator_tsx.js"
+      "static/chunks/6266-b7a6764014a18abf.js",
+      "static/chunks/5435.75540c2deff9778c.js",
+      "static/chunks/822.99c106b52a45f41b.js"
     ]
   },
-  "lib\\tools-registry.ts -> @/tools/BmiChart": {
-    "id": "lib\\tools-registry.ts -> @/tools/BmiChart",
+  "lib/tools-registry.ts -> @/tools/CalorieCalculator": {
+    "id": 9295,
     "files": [
-      "static/chunks/_app-pages-browser_src_tools_BmiChart_tsx.js"
+      "static/chunks/6266-b7a6764014a18abf.js",
+      "static/chunks/5435.75540c2deff9778c.js",
+      "static/chunks/9750-aed9bc7455b118ea.js",
+      "static/chunks/3483-0748c3cfd8dbe042.js",
+      "static/chunks/4800.854196fa9a4c1d9b.js",
+      "static/chunks/9405.f95d96df5448dc87.js",
+      "static/chunks/9295.6b3266af8a2af444.js"
     ]
   },
-  "lib\\tools-registry.ts -> @/tools/CalorieCalculator": {
-    "id": "lib\\tools-registry.ts -> @/tools/CalorieCalculator",
+  "lib/tools-registry.ts -> @/tools/CaseConverter": {
+    "id": 1006,
     "files": [
-      "static/chunks/_app-pages-browser_src_tools_CalorieCalculator_tsx.js"
+      "static/chunks/6266-b7a6764014a18abf.js",
+      "static/chunks/5435.75540c2deff9778c.js",
+      "static/chunks/1006.a9c3b639a68eee7e.js"
     ]
   },
-  "lib\\tools-registry.ts -> @/tools/CaseConverter": {
-    "id": "lib\\tools-registry.ts -> @/tools/CaseConverter",
+  "lib/tools-registry.ts -> @/tools/CharacterCounter": {
+    "id": 5325,
     "files": [
-      "static/chunks/_app-pages-browser_src_tools_CaseConverter_tsx.js"
+      "static/chunks/6266-b7a6764014a18abf.js",
+      "static/chunks/5435.75540c2deff9778c.js",
+      "static/chunks/5325.16623dbcde03bd2d.js"
     ]
   },
-  "lib\\tools-registry.ts -> @/tools/CharacterCounter": {
-    "id": "lib\\tools-registry.ts -> @/tools/CharacterCounter",
+  "lib/tools-registry.ts -> @/tools/ColorPicker": {
+    "id": 481,
     "files": [
-      "static/chunks/_app-pages-browser_src_tools_CharacterCounter_tsx.js"
+      "static/chunks/6266-b7a6764014a18abf.js",
+      "static/chunks/5435.75540c2deff9778c.js",
+      "static/chunks/9750-aed9bc7455b118ea.js",
+      "static/chunks/9405.f95d96df5448dc87.js",
+      "static/chunks/317.c2cf9c59aa0d9dad.js"
     ]
   },
-  "lib\\tools-registry.ts -> @/tools/ColorPicker": {
-    "id": "lib\\tools-registry.ts -> @/tools/ColorPicker",
+  "lib/tools-registry.ts -> @/tools/CompoundInterestCalculator": {
+    "id": 419,
     "files": [
-      "static/chunks/_app-pages-browser_src_tools_ColorPicker_tsx.js"
+      "static/chunks/6266-b7a6764014a18abf.js",
+      "static/chunks/5435.75540c2deff9778c.js",
+      "static/chunks/419.954585cbc4bdc403.js"
     ]
   },
-  "lib\\tools-registry.ts -> @/tools/CompoundInterestCalculator": {
-    "id": "lib\\tools-registry.ts -> @/tools/CompoundInterestCalculator",
+  "lib/tools-registry.ts -> @/tools/CurrencyConverter": {
+    "id": 7757,
     "files": [
-      "static/chunks/_app-pages-browser_src_tools_CompoundInterestCalculator_tsx.js"
+      "static/chunks/6266-b7a6764014a18abf.js",
+      "static/chunks/5435.75540c2deff9778c.js",
+      "static/chunks/3483-0748c3cfd8dbe042.js",
+      "static/chunks/4800.854196fa9a4c1d9b.js",
+      "static/chunks/3167.2ebf55a9eacea6c2.js"
     ]
   },
-  "lib\\tools-registry.ts -> @/tools/CurrencyConverter": {
-    "id": "lib\\tools-registry.ts -> @/tools/CurrencyConverter",
+  "lib/tools-registry.ts -> @/tools/DateDifferenceCalculator": {
+    "id": 7863,
     "files": [
-      "static/chunks/_app-pages-browser_src_tools_CurrencyConverter_tsx.js"
+      "static/chunks/6266-b7a6764014a18abf.js",
+      "static/chunks/5435.75540c2deff9778c.js",
+      "static/chunks/7863.07055ae695c26e06.js"
     ]
   },
-  "lib\\tools-registry.ts -> @/tools/DateDifferenceCalculator": {
-    "id": "lib\\tools-registry.ts -> @/tools/DateDifferenceCalculator",
+  "lib/tools-registry.ts -> @/tools/DiscountCalculator": {
+    "id": 6787,
     "files": [
-      "static/chunks/_app-pages-browser_src_tools_DateDifferenceCalculator_tsx.js"
+      "static/chunks/6266-b7a6764014a18abf.js",
+      "static/chunks/5435.75540c2deff9778c.js",
+      "static/chunks/6787.34c7ef8a561a9223.js"
     ]
   },
-  "lib\\tools-registry.ts -> @/tools/DiscountCalculator": {
-    "id": "lib\\tools-registry.ts -> @/tools/DiscountCalculator",
+  "lib/tools-registry.ts -> @/tools/EmiCalculator": {
+    "id": 6137,
     "files": [
-      "static/chunks/_app-pages-browser_src_tools_DiscountCalculator_tsx.js"
+      "static/chunks/6266-b7a6764014a18abf.js",
+      "static/chunks/5435.75540c2deff9778c.js",
+      "static/chunks/9750-aed9bc7455b118ea.js",
+      "static/chunks/9405.f95d96df5448dc87.js",
+      "static/chunks/5181.cf85099f6fabd208.js"
     ]
   },
-  "lib\\tools-registry.ts -> @/tools/EmiCalculator": {
-    "id": "lib\\tools-registry.ts -> @/tools/EmiCalculator",
+  "lib/tools-registry.ts -> @/tools/FractionToDecimal": {
+    "id": 5144,
     "files": [
-      "static/chunks/_app-pages-browser_src_tools_EmiCalculator_tsx.js"
+      "static/chunks/6266-b7a6764014a18abf.js",
+      "static/chunks/5435.75540c2deff9778c.js",
+      "static/chunks/5144.d2567ae7483dc3f7.js"
     ]
   },
-  "lib\\tools-registry.ts -> @/tools/FractionToDecimal": {
-    "id": "lib\\tools-registry.ts -> @/tools/FractionToDecimal",
+  "lib/tools-registry.ts -> @/tools/GstCalculator": {
+    "id": 2780,
     "files": [
-      "static/chunks/_app-pages-browser_src_tools_FractionToDecimal_tsx.js"
+      "static/chunks/6266-b7a6764014a18abf.js",
+      "static/chunks/5435.75540c2deff9778c.js",
+      "static/chunks/8062.ab8b0e2609be3e7e.js",
+      "static/chunks/2780.856153ee0a677a45.js"
     ]
   },
-  "lib\\tools-registry.ts -> @/tools/GstCalculator": {
-    "id": "lib\\tools-registry.ts -> @/tools/GstCalculator",
+  "lib/tools-registry.ts -> @/tools/HexToRgb": {
+    "id": 9111,
     "files": [
-      "static/chunks/_app-pages-browser_src_tools_GstCalculator_tsx.js"
+      "static/chunks/6266-b7a6764014a18abf.js",
+      "static/chunks/5435.75540c2deff9778c.js",
+      "static/chunks/9750-aed9bc7455b118ea.js",
+      "static/chunks/9405.f95d96df5448dc87.js",
+      "static/chunks/6027.2cc4431eac94a4c4.js"
     ]
   },
-  "lib\\tools-registry.ts -> @/tools/HexToRgb": {
-    "id": "lib\\tools-registry.ts -> @/tools/HexToRgb",
+  "lib/tools-registry.ts -> @/tools/HtmlEncoderDecoder": {
+    "id": 1949,
     "files": [
-      "static/chunks/_app-pages-browser_src_tools_HexToRgb_tsx.js"
+      "static/chunks/6266-b7a6764014a18abf.js",
+      "static/chunks/5435.75540c2deff9778c.js",
+      "static/chunks/9750-aed9bc7455b118ea.js",
+      "static/chunks/9405.f95d96df5448dc87.js",
+      "static/chunks/2185.ca1f9f0199c03775.js"
     ]
   },
-  "lib\\tools-registry.ts -> @/tools/HtmlEncoderDecoder": {
-    "id": "lib\\tools-registry.ts -> @/tools/HtmlEncoderDecoder",
+  "lib/tools-registry.ts -> @/tools/IdealWeightCalculator": {
+    "id": 101,
     "files": [
-      "static/chunks/_app-pages-browser_src_tools_HtmlEncoderDecoder_tsx.js"
+      "static/chunks/6266-b7a6764014a18abf.js",
+      "static/chunks/5435.75540c2deff9778c.js",
+      "static/chunks/3483-0748c3cfd8dbe042.js",
+      "static/chunks/4800.854196fa9a4c1d9b.js",
+      "static/chunks/5223.df308c6c22d1fe4f.js"
     ]
   },
-  "lib\\tools-registry.ts -> @/tools/IdealWeightCalculator": {
-    "id": "lib\\tools-registry.ts -> @/tools/IdealWeightCalculator",
+  "lib/tools-registry.ts -> @/tools/ImageCompressor": {
+    "id": 5810,
     "files": [
-      "static/chunks/_app-pages-browser_src_tools_IdealWeightCalculator_tsx.js"
+      "static/chunks/6266-b7a6764014a18abf.js",
+      "static/chunks/5435.75540c2deff9778c.js",
+      "static/chunks/5563.cca56f944e114abd.js",
+      "static/chunks/5810.7edab0a7fdbacf44.js"
     ]
   },
-  "lib\\tools-registry.ts -> @/tools/ImageCompressor": {
-    "id": "lib\\tools-registry.ts -> @/tools/ImageCompressor",
+  "lib/tools-registry.ts -> @/tools/JsonFormatter": {
+    "id": 5890,
     "files": [
-      "static/chunks/_app-pages-browser_src_tools_ImageCompressor_tsx.js"
+      "static/chunks/6266-b7a6764014a18abf.js",
+      "static/chunks/5435.75540c2deff9778c.js",
+      "static/chunks/9750-aed9bc7455b118ea.js",
+      "static/chunks/9405.f95d96df5448dc87.js",
+      "static/chunks/5838.11dd177d938ab51c.js"
     ]
   },
-  "lib\\tools-registry.ts -> @/tools/JsonFormatter": {
-    "id": "lib\\tools-registry.ts -> @/tools/JsonFormatter",
+  "lib/tools-registry.ts -> @/tools/JwtDecoder": {
+    "id": 1095,
     "files": [
-      "static/chunks/_app-pages-browser_src_tools_JsonFormatter_tsx.js"
+      "static/chunks/6266-b7a6764014a18abf.js",
+      "static/chunks/5435.75540c2deff9778c.js",
+      "static/chunks/1095.618e6d20d9c2834f.js"
     ]
   },
-  "lib\\tools-registry.ts -> @/tools/JwtDecoder": {
-    "id": "lib\\tools-registry.ts -> @/tools/JwtDecoder",
+  "lib/tools-registry.ts -> @/tools/KeywordDensityChecker": {
+    "id": 1538,
     "files": [
-      "static/chunks/_app-pages-browser_src_tools_JwtDecoder_tsx.js"
+      "static/chunks/6266-b7a6764014a18abf.js",
+      "static/chunks/5435.75540c2deff9778c.js",
+      "static/chunks/1538.b4c9815c1f502382.js"
     ]
   },
-  "lib\\tools-registry.ts -> @/tools/KeywordDensityChecker": {
-    "id": "lib\\tools-registry.ts -> @/tools/KeywordDensityChecker",
+  "lib/tools-registry.ts -> @/tools/LoremIpsumGenerator": {
+    "id": 1068,
     "files": [
-      "static/chunks/_app-pages-browser_src_tools_KeywordDensityChecker_tsx.js"
+      "static/chunks/6266-b7a6764014a18abf.js",
+      "static/chunks/5435.75540c2deff9778c.js",
+      "static/chunks/9750-aed9bc7455b118ea.js",
+      "static/chunks/9405.f95d96df5448dc87.js",
+      "static/chunks/648.b163abc7d6b82a8c.js"
     ]
   },
-  "lib\\tools-registry.ts -> @/tools/LoremIpsumGenerator": {
-    "id": "lib\\tools-registry.ts -> @/tools/LoremIpsumGenerator",
+  "lib/tools-registry.ts -> @/tools/MarkdownPreviewer": {
+    "id": 8942,
     "files": [
-      "static/chunks/_app-pages-browser_src_tools_LoremIpsumGenerator_tsx.js"
+      "static/chunks/6266-b7a6764014a18abf.js",
+      "static/chunks/5435.75540c2deff9778c.js",
+      "static/chunks/8942.7b50be0003f00c1e.js"
     ]
   },
-  "lib\\tools-registry.ts -> @/tools/MarkdownPreviewer": {
-    "id": "lib\\tools-registry.ts -> @/tools/MarkdownPreviewer",
+  "lib/tools-registry.ts -> @/tools/MetaTagGenerator": {
+    "id": 6990,
     "files": [
-      "static/chunks/_app-pages-browser_src_tools_MarkdownPreviewer_tsx.js"
+      "static/chunks/6266-b7a6764014a18abf.js",
+      "static/chunks/5435.75540c2deff9778c.js",
+      "static/chunks/9750-aed9bc7455b118ea.js",
+      "static/chunks/9405.f95d96df5448dc87.js",
+      "static/chunks/7674.05aded167be0d8b5.js"
     ]
   },
-  "lib\\tools-registry.ts -> @/tools/MetaTagGenerator": {
-    "id": "lib\\tools-registry.ts -> @/tools/MetaTagGenerator",
+  "lib/tools-registry.ts -> @/tools/OpenGraphGenerator": {
+    "id": 9389,
     "files": [
-      "static/chunks/_app-pages-browser_src_tools_MetaTagGenerator_tsx.js"
+      "static/chunks/6266-b7a6764014a18abf.js",
+      "static/chunks/5435.75540c2deff9778c.js",
+      "static/chunks/9750-aed9bc7455b118ea.js",
+      "static/chunks/9405.f95d96df5448dc87.js",
+      "static/chunks/8625.347050d677060ad4.js"
     ]
   },
-  "lib\\tools-registry.ts -> @/tools/OpenGraphGenerator": {
-    "id": "lib\\tools-registry.ts -> @/tools/OpenGraphGenerator",
+  "lib/tools-registry.ts -> @/tools/PasswordGenerator": {
+    "id": 4938,
     "files": [
-      "static/chunks/_app-pages-browser_src_tools_OpenGraphGenerator_tsx.js"
+      "static/chunks/6266-b7a6764014a18abf.js",
+      "static/chunks/5435.75540c2deff9778c.js",
+      "static/chunks/9750-aed9bc7455b118ea.js",
+      "static/chunks/5563.cca56f944e114abd.js",
+      "static/chunks/9405.f95d96df5448dc87.js",
+      "static/chunks/7702.e8b7d3ee4dc9bc93.js"
     ]
   },
-  "lib\\tools-registry.ts -> @/tools/PasswordGenerator": {
-    "id": "lib\\tools-registry.ts -> @/tools/PasswordGenerator",
+  "lib/tools-registry.ts -> @/tools/PercentageCalculator": {
+    "id": 6070,
     "files": [
-      "static/chunks/_app-pages-browser_src_tools_PasswordGenerator_tsx.js"
+      "static/chunks/6266-b7a6764014a18abf.js",
+      "static/chunks/5435.75540c2deff9778c.js",
+      "static/chunks/6070.6c06cc3069ddbd21.js"
     ]
   },
-  "lib\\tools-registry.ts -> @/tools/PercentageCalculator": {
-    "id": "lib\\tools-registry.ts -> @/tools/PercentageCalculator",
+  "lib/tools-registry.ts -> @/tools/QrCodeGenerator": {
+    "id": 3567,
     "files": [
-      "static/chunks/_app-pages-browser_src_tools_PercentageCalculator_tsx.js"
+      "static/chunks/6266-b7a6764014a18abf.js",
+      "static/chunks/5435.75540c2deff9778c.js",
+      "static/chunks/3224.995eee3c350b9e3b.js",
+      "static/chunks/3567.1f19a3201050810c.js"
     ]
   },
-  "lib\\tools-registry.ts -> @/tools/QrCodeGenerator": {
-    "id": "lib\\tools-registry.ts -> @/tools/QrCodeGenerator",
+  "lib/tools-registry.ts -> @/tools/RandomNumberGenerator": {
+    "id": 331,
     "files": [
-      "static/chunks/_app-pages-browser_src_tools_QrCodeGenerator_tsx.js"
+      "static/chunks/6266-b7a6764014a18abf.js",
+      "static/chunks/5435.75540c2deff9778c.js",
+      "static/chunks/9750-aed9bc7455b118ea.js",
+      "static/chunks/9405.f95d96df5448dc87.js",
+      "static/chunks/2311.848b84bc13f8fadf.js"
     ]
   },
-  "lib\\tools-registry.ts -> @/tools/RandomNumberGenerator": {
-    "id": "lib\\tools-registry.ts -> @/tools/RandomNumberGenerator",
+  "lib/tools-registry.ts -> @/tools/RegexTester": {
+    "id": 270,
     "files": [
-      "static/chunks/_app-pages-browser_src_tools_RandomNumberGenerator_tsx.js"
+      "static/chunks/6266-b7a6764014a18abf.js",
+      "static/chunks/5435.75540c2deff9778c.js",
+      "static/chunks/270.650e75bfef207f08.js"
     ]
   },
-  "lib\\tools-registry.ts -> @/tools/RegexTester": {
-    "id": "lib\\tools-registry.ts -> @/tools/RegexTester",
+  "lib/tools-registry.ts -> @/tools/RemoveDuplicateLines": {
+    "id": 1782,
     "files": [
-      "static/chunks/_app-pages-browser_src_tools_RegexTester_tsx.js"
+      "static/chunks/6266-b7a6764014a18abf.js",
+      "static/chunks/5435.75540c2deff9778c.js",
+      "static/chunks/9750-aed9bc7455b118ea.js",
+      "static/chunks/9405.f95d96df5448dc87.js",
+      "static/chunks/7938.094b64dbf4bb13a2.js"
     ]
   },
-  "lib\\tools-registry.ts -> @/tools/RemoveDuplicateLines": {
-    "id": "lib\\tools-registry.ts -> @/tools/RemoveDuplicateLines",
+  "lib/tools-registry.ts -> @/tools/RobotsTxtGenerator": {
+    "id": 9646,
     "files": [
-      "static/chunks/_app-pages-browser_src_tools_RemoveDuplicateLines_tsx.js"
+      "static/chunks/6266-b7a6764014a18abf.js",
+      "static/chunks/5435.75540c2deff9778c.js",
+      "static/chunks/9750-aed9bc7455b118ea.js",
+      "static/chunks/9405.f95d96df5448dc87.js",
+      "static/chunks/6874.104acce11cc1250b.js"
     ]
   },
-  "lib\\tools-registry.ts -> @/tools/RobotsTxtGenerator": {
-    "id": "lib\\tools-registry.ts -> @/tools/RobotsTxtGenerator",
+  "lib/tools-registry.ts -> @/tools/SalaryToHourlyConverter": {
+    "id": 7012,
     "files": [
-      "static/chunks/_app-pages-browser_src_tools_RobotsTxtGenerator_tsx.js"
+      "static/chunks/6266-b7a6764014a18abf.js",
+      "static/chunks/5435.75540c2deff9778c.js",
+      "static/chunks/7012.80bcbf9a8514a22b.js"
     ]
   },
-  "lib\\tools-registry.ts -> @/tools/SalaryToHourlyConverter": {
-    "id": "lib\\tools-registry.ts -> @/tools/SalaryToHourlyConverter",
+  "lib/tools-registry.ts -> @/tools/ScientificCalculator": {
+    "id": 9193,
     "files": [
-      "static/chunks/_app-pages-browser_src_tools_SalaryToHourlyConverter_tsx.js"
+      "static/chunks/6266-b7a6764014a18abf.js",
+      "static/chunks/5435.75540c2deff9778c.js",
+      "static/chunks/9193.0f8e3a726dca26b6.js"
     ]
   },
-  "lib\\tools-registry.ts -> @/tools/ScientificCalculator": {
-    "id": "lib\\tools-registry.ts -> @/tools/ScientificCalculator",
+  "lib/tools-registry.ts -> @/tools/SimpleInterestCalculator": {
+    "id": 4758,
     "files": [
-      "static/chunks/_app-pages-browser_src_tools_ScientificCalculator_tsx.js"
+      "static/chunks/6266-b7a6764014a18abf.js",
+      "static/chunks/5435.75540c2deff9778c.js",
+      "static/chunks/4758.a9ab88db5935002d.js"
     ]
   },
-  "lib\\tools-registry.ts -> @/tools/SimpleInterestCalculator": {
-    "id": "lib\\tools-registry.ts -> @/tools/SimpleInterestCalculator",
+  "lib/tools-registry.ts -> @/tools/SlugGenerator": {
+    "id": 9702,
     "files": [
-      "static/chunks/_app-pages-browser_src_tools_SimpleInterestCalculator_tsx.js"
+      "static/chunks/6266-b7a6764014a18abf.js",
+      "static/chunks/5435.75540c2deff9778c.js",
+      "static/chunks/9750-aed9bc7455b118ea.js",
+      "static/chunks/9405.f95d96df5448dc87.js",
+      "static/chunks/9530.52edc680007c5d89.js"
     ]
   },
-  "lib\\tools-registry.ts -> @/tools/SlugGenerator": {
-    "id": "lib\\tools-registry.ts -> @/tools/SlugGenerator",
+  "lib/tools-registry.ts -> @/tools/StopwatchTimer": {
+    "id": 7505,
     "files": [
-      "static/chunks/_app-pages-browser_src_tools_SlugGenerator_tsx.js"
+      "static/chunks/6266-b7a6764014a18abf.js",
+      "static/chunks/5435.75540c2deff9778c.js",
+      "static/chunks/5681.ab8b0e2609be3e7e.js",
+      "static/chunks/9886.7d2ee8c258ecde13.js"
     ]
   },
-  "lib\\tools-registry.ts -> @/tools/StopwatchTimer": {
-    "id": "lib\\tools-registry.ts -> @/tools/StopwatchTimer",
+  "lib/tools-registry.ts -> @/tools/TextReverser": {
+    "id": 3379,
     "files": [
-      "static/chunks/_app-pages-browser_src_tools_StopwatchTimer_tsx.js"
+      "static/chunks/6266-b7a6764014a18abf.js",
+      "static/chunks/5435.75540c2deff9778c.js",
+      "static/chunks/9750-aed9bc7455b118ea.js",
+      "static/chunks/9405.f95d96df5448dc87.js",
+      "static/chunks/6863.4b65d206ef30f0ee.js"
     ]
   },
-  "lib\\tools-registry.ts -> @/tools/TextReverser": {
-    "id": "lib\\tools-registry.ts -> @/tools/TextReverser",
+  "lib/tools-registry.ts -> @/tools/TextToSpeech": {
+    "id": 4158,
     "files": [
-      "static/chunks/_app-pages-browser_src_tools_TextReverser_tsx.js"
+      "static/chunks/6266-b7a6764014a18abf.js",
+      "static/chunks/5435.75540c2deff9778c.js",
+      "static/chunks/4158.25804d2ca851deaa.js"
     ]
   },
-  "lib\\tools-registry.ts -> @/tools/TextToSpeech": {
-    "id": "lib\\tools-registry.ts -> @/tools/TextToSpeech",
+  "lib/tools-registry.ts -> @/tools/TimeZoneConverter": {
+    "id": 2613,
     "files": [
-      "static/chunks/_app-pages-browser_src_tools_TextToSpeech_tsx.js"
+      "static/chunks/6266-b7a6764014a18abf.js",
+      "static/chunks/5435.75540c2deff9778c.js",
+      "static/chunks/3483-0748c3cfd8dbe042.js",
+      "static/chunks/4800.854196fa9a4c1d9b.js",
+      "static/chunks/9863.34a05705ffc80b3d.js"
     ]
   },
-  "lib\\tools-registry.ts -> @/tools/TimeZoneConverter": {
-    "id": "lib\\tools-registry.ts -> @/tools/TimeZoneConverter",
+  "lib/tools-registry.ts -> @/tools/TipCalculator": {
+    "id": 1833,
     "files": [
-      "static/chunks/_app-pages-browser_src_tools_TimeZoneConverter_tsx.js"
+      "static/chunks/6266-b7a6764014a18abf.js",
+      "static/chunks/5435.75540c2deff9778c.js",
+      "static/chunks/1833.2495b3deb510be26.js"
     ]
   },
-  "lib\\tools-registry.ts -> @/tools/TipCalculator": {
-    "id": "lib\\tools-registry.ts -> @/tools/TipCalculator",
+  "lib/tools-registry.ts -> @/tools/UnitConverter": {
+    "id": 7144,
     "files": [
-      "static/chunks/_app-pages-browser_src_tools_TipCalculator_tsx.js"
+      "static/chunks/6266-b7a6764014a18abf.js",
+      "static/chunks/5435.75540c2deff9778c.js",
+      "static/chunks/3483-0748c3cfd8dbe042.js",
+      "static/chunks/4800.854196fa9a4c1d9b.js",
+      "static/chunks/3942.1521a40849aacf17.js",
+      "static/chunks/7144.fbb6300de582fbfa.js"
     ]
   },
-  "lib\\tools-registry.ts -> @/tools/UnitConverter": {
-    "id": "lib\\tools-registry.ts -> @/tools/UnitConverter",
+  "lib/tools-registry.ts -> @/tools/UrlEncoderDecoder": {
+    "id": 2993,
     "files": [
-      "static/chunks/_app-pages-browser_src_tools_UnitConverter_tsx.js"
+      "static/chunks/6266-b7a6764014a18abf.js",
+      "static/chunks/5435.75540c2deff9778c.js",
+      "static/chunks/9750-aed9bc7455b118ea.js",
+      "static/chunks/9405.f95d96df5448dc87.js",
+      "static/chunks/6813.1626f47299683098.js"
     ]
   },
-  "lib\\tools-registry.ts -> @/tools/UrlEncoderDecoder": {
-    "id": "lib\\tools-registry.ts -> @/tools/UrlEncoderDecoder",
+  "lib/tools-registry.ts -> @/tools/UuidGenerator": {
+    "id": 9086,
     "files": [
-      "static/chunks/_app-pages-browser_src_tools_UrlEncoderDecoder_tsx.js"
+      "static/chunks/6266-b7a6764014a18abf.js",
+      "static/chunks/5435.75540c2deff9778c.js",
+      "static/chunks/9750-aed9bc7455b118ea.js",
+      "static/chunks/9405.f95d96df5448dc87.js",
+      "static/chunks/4482.00713fd797b05a1c.js"
     ]
   },
-  "lib\\tools-registry.ts -> @/tools/UuidGenerator": {
-    "id": "lib\\tools-registry.ts -> @/tools/UuidGenerator",
+  "lib/tools-registry.ts -> @/tools/WaterIntakeCalculator": {
+    "id": 9391,
     "files": [
-      "static/chunks/_app-pages-browser_src_tools_UuidGenerator_tsx.js"
+      "static/chunks/6266-b7a6764014a18abf.js",
+      "static/chunks/5435.75540c2deff9778c.js",
+      "static/chunks/9391.eb7bdfdc0c434f76.js"
     ]
   },
-  "lib\\tools-registry.ts -> @/tools/WaterIntakeCalculator": {
-    "id": "lib\\tools-registry.ts -> @/tools/WaterIntakeCalculator",
+  "lib/tools-registry.ts -> @/tools/WordCounter": {
+    "id": 6322,
     "files": [
-      "static/chunks/_app-pages-browser_src_tools_WaterIntakeCalculator_tsx.js"
-    ]
-  },
-  "lib\\tools-registry.ts -> @/tools/WordCounter": {
-    "id": "lib\\tools-registry.ts -> @/tools/WordCounter",
-    "files": [
-      "static/chunks/_app-pages-browser_src_tools_WordCounter_tsx.js"
+      "static/chunks/6266-b7a6764014a18abf.js",
+      "static/chunks/5435.75540c2deff9778c.js",
+      "static/chunks/6322.92e0622e668f400a.js"
     ]
   }
 }

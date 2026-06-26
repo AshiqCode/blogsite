@@ -37,7 +37,8 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <hthead>
+    <html lang="en" suppressHydrationWarning>
+      <head>
         <Script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2174158128943381"
@@ -45,7 +46,6 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           strategy="afterInteractive"
         />
       </head>
-      <ml lang="en" suppressHydrationWarning>
       <body>
         <Providers>
           <div className="flex min-h-screen flex-col">
