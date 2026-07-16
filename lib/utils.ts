@@ -1,4 +1,6 @@
-import DOMPurify from "isomorphic-dompurify";
+// NOTE: keep this module free of heavy/server-only deps (e.g. DOMPurify/jsdom).
+// It's imported by client components and every listing page. HTML sanitizing
+// lives in `lib/sanitize.ts` (server-only) instead.
 
 /** Convert a string into a URL-safe slug. */
 export function slugify(input: string): string {
@@ -11,14 +13,6 @@ export function slugify(input: string): string {
     .replace(/[^a-z0-9\s-]/g, "")
     .replace(/[\s_-]+/g, "-")
     .replace(/^-+|-+$/g, "");
-}
-
-/** Sanitize untrusted HTML (rich-text content) before rendering/storing. */
-export function sanitizeHtml(dirty: string): string {
-  return DOMPurify.sanitize(dirty, {
-    USE_PROFILES: { html: true },
-    ADD_ATTR: ["target", "rel"],
-  });
 }
 
 /** Human-readable date, e.g. "July 16, 2026". */

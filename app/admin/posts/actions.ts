@@ -4,7 +4,8 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { requireAdmin } from "@/lib/auth";
-import { makeExcerpt, sanitizeHtml, slugify } from "@/lib/utils";
+import { makeExcerpt, slugify } from "@/lib/utils";
+import { sanitizeHtml } from "@/lib/sanitize";
 import type { PostStatus } from "@/lib/types";
 
 export interface PostFormState {
@@ -49,7 +50,7 @@ export async function savePost(
 
   const id = String(formData.get("id") ?? "") || null;
   const title = String(formData.get("title") ?? "").trim();
-  const content = sanitizeHtml(String(formData.get("content") ?? ""));
+  const content = await sanitizeHtml(String(formData.get("content") ?? ""));
   const status = String(formData.get("status") ?? "draft") as PostStatus;
 
   if (!title) return { error: "Title is required." };
