@@ -45,27 +45,12 @@ export async function saveSettings(
     google_analytics_id: field(formData, "google_analytics_id"),
     google_verification: field(formData, "google_verification"),
     adsense_publisher_id: field(formData, "adsense_publisher_id"),
-    author_name: field(formData, "author_name"),
-    author_bio: field(formData, "author_bio"),
-    author_avatar: field(formData, "author_avatar"),
     updated_at: new Date().toISOString(),
   };
 
-  let { error } = await supabase
+  const { error } = await supabase
     .from("settings")
     .upsert(record, { onConflict: "id" });
-
-  // If the author_* columns don't exist yet (migration not run), retry
-  // without them so the rest of the settings still save.
-  if (error && /author_(name|bio|avatar)/.test(error.message ?? "")) {
-    const { author_name, author_bio, author_avatar, ...rest } = record;
-    void author_name;
-    void author_bio;
-    void author_avatar;
-    ({ error } = await supabase
-      .from("settings")
-      .upsert(rest, { onConflict: "id" }));
-  }
 
   if (error) return { error: "Failed to save settings." };
 

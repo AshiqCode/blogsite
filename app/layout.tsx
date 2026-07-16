@@ -26,7 +26,13 @@ export async function generateMetadata(): Promise<Metadata> {
       canonical: "/",
       types: { "application/rss+xml": `${siteUrl()}/feed.xml` },
     },
-    icons: settings.favicon_url ? { icon: settings.favicon_url } : undefined,
+    icons: settings.favicon_url
+      ? {
+          icon: settings.favicon_url,
+          shortcut: settings.favicon_url,
+          apple: settings.favicon_url,
+        }
+      : undefined,
     openGraph: {
       type: "website",
       siteName: settings.site_title,
