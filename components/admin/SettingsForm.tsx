@@ -82,6 +82,37 @@ export function SettingsForm({ settings }: { settings: SiteSettings }) {
         />
       </fieldset>
 
+      <fieldset className="rounded-xl border border-border bg-white p-5">
+        <legend className="px-1 text-sm font-semibold">
+          Author (shown on articles — good for SEO/E-E-A-T)
+        </legend>
+        <div className="grid gap-4 sm:grid-cols-2">
+          <Field
+            label="Author Name"
+            name="author_name"
+            defaultValue={settings.author_name}
+            placeholder="e.g. Muhammad Ashiq"
+          />
+          <Field
+            label="Author Avatar URL"
+            name="author_avatar"
+            type="url"
+            defaultValue={settings.author_avatar}
+            placeholder="https://…"
+          />
+          <div className="sm:col-span-2">
+            <label className="mb-1 block text-sm font-medium">Author Bio</label>
+            <textarea
+              name="author_bio"
+              rows={3}
+              defaultValue={settings.author_bio ?? ""}
+              placeholder="A short bio shown under each article."
+              className="w-full resize-y rounded-lg border border-border bg-white px-3 py-2 text-sm outline-none focus:border-accent"
+            />
+          </div>
+        </div>
+      </fieldset>
+
       <Section title="Contact">
         <Field label="Contact Email" name="contact_email" type="email" defaultValue={settings.contact_email} />
         <Field label="Contact Phone" name="contact_phone" defaultValue={settings.contact_phone} />

@@ -22,7 +22,10 @@ export async function generateMetadata(): Promise<Metadata> {
     keywords: settings.seo_keywords
       ? settings.seo_keywords.split(",").map((k) => k.trim()).filter(Boolean)
       : undefined,
-    alternates: { canonical: "/" },
+    alternates: {
+      canonical: "/",
+      types: { "application/rss+xml": `${siteUrl()}/feed.xml` },
+    },
     icons: settings.favicon_url ? { icon: settings.favicon_url } : undefined,
     openGraph: {
       type: "website",

@@ -89,6 +89,9 @@ export interface SiteSettings {
   google_analytics_id: string | null;
   google_verification: string | null;
   adsense_publisher_id: string | null;
+  author_name: string | null;
+  author_bio: string | null;
+  author_avatar: string | null;
   updated_at: string;
 }
 

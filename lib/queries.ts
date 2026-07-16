@@ -34,6 +34,9 @@ const DEFAULT_SETTINGS: SiteSettings = {
   google_analytics_id: null,
   google_verification: null,
   adsense_publisher_id: null,
+  author_name: null,
+  author_bio: null,
+  author_avatar: null,
   updated_at: new Date(0).toISOString(),
 };
 
@@ -154,6 +157,78 @@ export async function getPostBySlug(
     post: data as unknown as PostWithRelations,
     comments: comments ?? [],
   };
+}
+
+/**
+ * Related published posts for the given article: same category first, then
+ * filled with other recent posts. Excludes the current post.
+ */
+export async function getRelatedPosts(
+  postId: string,
+  categoryId: string | null,
+  limit = 3,
+): Promise<PostWithRelations[]> {
+  try {
+    const supabase = await createClient();
+    const collected: PostWithRelations[] = [];
+    const seen = new Set<string>([postId]);
+
+    if (categoryId) {
+      const { data } = await supabase
+        .from("posts")
+        .select(POST_SELECT)
+        .eq("status", "published")
+        .eq("category_id", categoryId)
+        .neq("id", postId)
+        .order("published_at", { ascending: false })
+        .limit(limit);
+      for (const p of (data as unknown as PostWithRelations[]) ?? []) {
+        if (!seen.has(p.id)) {
+          seen.add(p.id);
+          collected.push(p);
+        }
+      }
+    }
+
+    if (collected.length < limit) {
+      const { data } = await supabase
+        .from("posts")
+        .select(POST_SELECT)
+        .eq("status", "published")
+        .neq("id", postId)
+        .order("published_at", { ascending: false })
+        .limit(limit + 1);
+      for (const p of (data as unknown as PostWithRelations[]) ?? []) {
+        if (collected.length >= limit) break;
+        if (!seen.has(p.id)) {
+          seen.add(p.id);
+          collected.push(p);
+        }
+      }
+    }
+
+    return collected.slice(0, limit);
+  } catch {
+    return [];
+  }
+}
+
+/** Recent published posts (used by the RSS feed). */
+export async function getRecentPublished(
+  limit = 20,
+): Promise<PostWithRelations[]> {
+  try {
+    const supabase = await createClient();
+    const { data } = await supabase
+      .from("posts")
+      .select(POST_SELECT)
+      .eq("status", "published")
+      .order("published_at", { ascending: false })
+      .limit(limit);
+    return (data as unknown as PostWithRelations[]) ?? [];
+  } catch {
+    return [];
+  }
 }
 
 /** Increment a post's view counter (fire and forget). */

@@ -27,6 +27,13 @@ export function PostRowActions({
           View
         </Link>
       )}
+      <Link
+        href={`/admin/posts/${id}/preview`}
+        target="_blank"
+        className="text-zinc-500 hover:text-accent"
+      >
+        Preview
+      </Link>
       <Link href={`/admin/posts/${id}/edit`} className="text-accent hover:underline">
         Edit
       </Link>

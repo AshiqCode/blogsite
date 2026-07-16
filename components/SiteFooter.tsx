@@ -65,6 +65,12 @@ export async function SiteFooter() {
               <Link href="/privacy" className="hover:text-accent">
                 Privacy
               </Link>
+              <Link href="/terms" className="hover:text-accent">
+                Terms
+              </Link>
+              <a href="/feed.xml" className="hover:text-accent">
+                RSS
+              </a>
             </nav>
           </div>
         </div>

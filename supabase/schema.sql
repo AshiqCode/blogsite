@@ -96,6 +96,9 @@ create table if not exists public.settings (
   google_analytics_id  text,
   google_verification  text,
   adsense_publisher_id text,
+  author_name          text,
+  author_bio           text,
+  author_avatar        text,
   updated_at           timestamptz not null default now()
 );
 

@@ -47,6 +47,15 @@ export function PostEditor({
           >
             Cancel
           </Link>
+          {post && (
+            <Link
+              href={`/admin/posts/${post.id}/preview`}
+              target="_blank"
+              className="rounded-lg border border-border bg-white px-4 py-2 text-sm font-medium hover:bg-zinc-100"
+            >
+              Preview
+            </Link>
+          )}
           <button
             type="submit"
             name="status"

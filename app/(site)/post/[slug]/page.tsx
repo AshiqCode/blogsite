@@ -2,11 +2,18 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import type { Metadata } from "next";
-import { getPostBySlug, getSettings, trackView } from "@/lib/queries";
+import {
+  getPostBySlug,
+  getRelatedPosts,
+  getSettings,
+  trackView,
+} from "@/lib/queries";
 import { formatDate, readingTime } from "@/lib/utils";
 import { absoluteUrl } from "@/lib/site";
 import { CommentSection } from "@/components/CommentSection";
 import { ShareButtons } from "@/components/ShareButtons";
+import { AuthorBio } from "@/components/AuthorBio";
+import { RelatedPosts } from "@/components/RelatedPosts";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -54,6 +61,9 @@ export default async function PostPage({ params }: Props) {
   if (!result) notFound();
   const { post, comments } = result;
 
+  const relatedPosts = await getRelatedPosts(post.id, post.category_id);
+  const authorName = settings.author_name || settings.site_title;
+
   // Best-effort view tracking.
   void trackView(slug);
 
@@ -67,7 +77,7 @@ export default async function PostPage({ params }: Props) {
     image: post.featured_image ? [post.featured_image] : undefined,
     datePublished: post.published_at ?? undefined,
     dateModified: post.updated_at ?? undefined,
-    author: { "@type": "Person", name: settings.site_title },
+    author: { "@type": "Person", name: authorName },
     publisher: {
       "@type": "Organization",
       name: settings.site_title,
@@ -103,6 +113,8 @@ export default async function PostPage({ params }: Props) {
           {post.title}
         </h1>
         <div className="mt-5 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-sm font-semibold text-muted">
+          <span className="text-foreground">By {authorName}</span>
+          <span className="h-1 w-1 rounded-full bg-border-strong" aria-hidden />
           <span>{formatDate(post.published_at)}</span>
           <span className="h-1 w-1 rounded-full bg-border-strong" aria-hidden />
           <span>{readingTime(post.content)}</span>
@@ -147,9 +159,11 @@ export default async function PostPage({ params }: Props) {
         <ShareButtons url={shareUrl} title={post.title} />
       </div>
 
-      <CommentSection postId={post.id} comments={comments} />
+      <AuthorBio settings={settings} />
 
-      <p className="sr-only">{settings.site_title}</p>
+      <RelatedPosts posts={relatedPosts} />
+
+      <CommentSection postId={post.id} comments={comments} />
     </article>
   );
 }
