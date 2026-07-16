@@ -3,6 +3,7 @@ import Script from "next/script";
 import "./globals.css";
 import { getSettings } from "@/lib/queries";
 import { siteUrl, absoluteUrl } from "@/lib/site";
+import { CookieConsent } from "@/components/CookieConsent";
 
 export async function generateMetadata(): Promise<Metadata> {
   const settings = await getSettings();
@@ -94,6 +95,7 @@ export default async function RootLayout({
   };
 
   const adsensePub = settings.adsense_publisher_id?.trim();
+  const consentNeeded = Boolean(settings.google_analytics_id || adsensePub);
 
   return (
     <html lang="en" className="h-full antialiased">
@@ -116,6 +118,22 @@ export default async function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
+
+        {/* Consent Mode v2 — default everything to denied until the visitor
+            accepts via the cookie banner. Runs before GA/AdSense load. */}
+        {consentNeeded && (
+          <Script id="consent-default" strategy="beforeInteractive">
+            {`window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('consent', 'default', {
+  ad_storage: 'denied',
+  analytics_storage: 'denied',
+  ad_user_data: 'denied',
+  ad_personalization: 'denied',
+  wait_for_update: 500
+});`}
+          </Script>
+        )}
 
         {/* Google Analytics */}
         {settings.google_analytics_id && (
@@ -143,6 +161,8 @@ gtag('config', '${settings.google_analytics_id}');`}
             crossOrigin="anonymous"
           />
         )}
+
+        <CookieConsent enabled={consentNeeded} />
       </body>
     </html>
   );

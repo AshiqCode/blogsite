@@ -59,8 +59,11 @@ export async function SiteFooter() {
               <Link href="/about" className="hover:text-accent">
                 About
               </Link>
-              <Link href="/search" className="hover:text-accent">
-                Search
+              <Link href="/contact" className="hover:text-accent">
+                Contact
+              </Link>
+              <Link href="/privacy" className="hover:text-accent">
+                Privacy
               </Link>
             </nav>
           </div>
