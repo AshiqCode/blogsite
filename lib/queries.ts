@@ -1,5 +1,6 @@
 import { createClient } from "@/lib/supabase/server";
 import type {
+  Author,
   Category,
   Comment,
   PostWithRelations,
@@ -76,6 +77,16 @@ export async function getTags(): Promise<Tag[]> {
   }
 }
 
+export async function getAuthors(): Promise<Author[]> {
+  try {
+    const supabase = await createClient();
+    const { data } = await supabase.from("authors").select("*").order("name");
+    return (data as Author[]) ?? [];
+  } catch {
+    return [];
+  }
+}
+
 interface PublishedPostsOptions {
   categorySlug?: string;
   tagSlug?: string;
@@ -145,18 +156,38 @@ export async function getPostBySlug(
     .single();
 
   if (!data) return null;
+  const post = data as unknown as PostWithRelations;
+
+  // Attach the author separately so a missing authors table/migration never
+  // breaks post fetching.
+  post.author = await getAuthorForPost(supabase, post.author_id);
 
   const { data: comments } = await supabase
     .from("comments")
     .select("*")
-    .eq("post_id", (data as unknown as PostWithRelations).id)
+    .eq("post_id", post.id)
     .eq("status", "approved")
     .order("created_at", { ascending: true });
 
-  return {
-    post: data as unknown as PostWithRelations,
-    comments: comments ?? [],
-  };
+  return { post, comments: comments ?? [] };
+}
+
+/** Safely fetch a single author by id (null if none / table missing). */
+async function getAuthorForPost(
+  supabase: Awaited<ReturnType<typeof createClient>>,
+  authorId: string | null | undefined,
+): Promise<Author | null> {
+  if (!authorId) return null;
+  try {
+    const { data } = await supabase
+      .from("authors")
+      .select("*")
+      .eq("id", authorId)
+      .single();
+    return (data as Author) ?? null;
+  } catch {
+    return null;
+  }
 }
 
 /**

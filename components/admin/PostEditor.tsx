@@ -6,7 +6,7 @@ import { savePost, type PostFormState } from "@/app/admin/posts/actions";
 import { RichTextEditor } from "@/components/admin/RichTextEditor";
 import { ImageField } from "@/components/admin/ImageField";
 import { slugify } from "@/lib/utils";
-import type { Category, PostWithRelations } from "@/lib/types";
+import type { Author, Category, PostWithRelations } from "@/lib/types";
 
 const initial: PostFormState = {};
 
@@ -20,9 +20,11 @@ function toLocalInput(iso: string | null): string {
 
 export function PostEditor({
   categories,
+  authors,
   post,
 }: {
   categories: Category[];
+  authors: Author[];
   post?: PostWithRelations;
 }) {
   const [state, formAction, pending] = useActionState(savePost, initial);
@@ -184,6 +186,32 @@ export function PostEditor({
                 No categories yet.{" "}
                 <Link href="/admin/categories" className="text-accent hover:underline">
                   Create one
+                </Link>
+                .
+              </p>
+            )}
+          </div>
+
+          <div className="rounded-xl border border-border bg-white p-4">
+            <label className="mb-1 block text-sm font-medium">Author</label>
+            <select
+              name="author_id"
+              defaultValue={post?.author_id ?? ""}
+              className="w-full rounded-lg border border-border bg-white px-3 py-2 text-sm outline-none focus:border-accent"
+            >
+              <option value="">— Default (site author) —</option>
+              {authors.map((a) => (
+                <option key={a.id} value={a.id}>
+                  {a.name}
+                  {a.role ? ` · ${a.role}` : ""}
+                </option>
+              ))}
+            </select>
+            {authors.length === 0 && (
+              <p className="mt-2 text-xs text-zinc-500">
+                No authors yet.{" "}
+                <Link href="/admin/authors" className="text-accent hover:underline">
+                  Add one
                 </Link>
                 .
               </p>

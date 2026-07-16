@@ -68,6 +68,7 @@ export async function savePost(
 
   const excerptInput = String(formData.get("excerpt") ?? "").trim();
   const categoryId = String(formData.get("category_id") ?? "") || null;
+  const authorId = String(formData.get("author_id") ?? "") || null;
   const publishDateInput = String(formData.get("published_at") ?? "").trim();
 
   const record = {
@@ -77,6 +78,7 @@ export async function savePost(
     excerpt: excerptInput || makeExcerpt(content),
     featured_image: String(formData.get("featured_image") ?? "").trim() || null,
     category_id: categoryId,
+    author_id: authorId,
     status,
     meta_title: String(formData.get("meta_title") ?? "").trim() || null,
     meta_description:

@@ -62,7 +62,13 @@ export default async function PostPage({ params }: Props) {
   const { post, comments } = result;
 
   const relatedPosts = await getRelatedPosts(post.id, post.category_id);
-  const authorName = settings.author_name || settings.site_title;
+  const author = {
+    name: post.author?.name || settings.author_name || settings.site_title,
+    bio: post.author?.bio ?? settings.author_bio,
+    avatar: post.author?.avatar_url ?? settings.author_avatar,
+    role: post.author?.role ?? null,
+  };
+  const authorName = author.name;
 
   // Best-effort view tracking.
   void trackView(slug);
@@ -159,7 +165,12 @@ export default async function PostPage({ params }: Props) {
         <ShareButtons url={shareUrl} title={post.title} />
       </div>
 
-      <AuthorBio settings={settings} />
+      <AuthorBio
+        name={author.name}
+        bio={author.bio}
+        avatar={author.avatar}
+        role={author.role}
+      />
 
       <RelatedPosts posts={relatedPosts} />
 

@@ -6,7 +6,7 @@ import { createClient } from "@/lib/supabase/server";
 import { getSettings } from "@/lib/queries";
 import { formatDate, readingTime } from "@/lib/utils";
 import { AuthorBio } from "@/components/AuthorBio";
-import type { PostWithRelations } from "@/lib/types";
+import type { Author, PostWithRelations } from "@/lib/types";
 
 export const metadata: Metadata = { title: "Preview", robots: { index: false } };
 
@@ -29,7 +29,25 @@ export default async function PreviewPage({
 
   if (!data) notFound();
   const post = data as unknown as PostWithRelations;
-  const authorName = settings.author_name || settings.site_title;
+
+  // Fetch the assigned author (if any) safely.
+  let postAuthor: Author | null = null;
+  if (post.author_id) {
+    const { data: a } = await supabase
+      .from("authors")
+      .select("*")
+      .eq("id", post.author_id)
+      .single();
+    postAuthor = (a as Author) ?? null;
+  }
+
+  const author = {
+    name: postAuthor?.name || settings.author_name || settings.site_title,
+    bio: postAuthor?.bio ?? settings.author_bio,
+    avatar: postAuthor?.avatar_url ?? settings.author_avatar,
+    role: postAuthor?.role ?? null,
+  };
+  const authorName = author.name;
 
   return (
     <div>
@@ -112,7 +130,12 @@ export default async function PreviewPage({
           </div>
         )}
 
-        <AuthorBio settings={settings} />
+        <AuthorBio
+          name={author.name}
+          bio={author.bio}
+          avatar={author.avatar}
+          role={author.role}
+        />
       </article>
     </div>
   );

@@ -1,10 +1,13 @@
 import type { Metadata } from "next";
-import { getCategories } from "@/lib/queries";
+import { getCategories, getAuthors } from "@/lib/queries";
 import { PostEditor } from "@/components/admin/PostEditor";
 
 export const metadata: Metadata = { title: "New Post" };
 
 export default async function NewPostPage() {
-  const categories = await getCategories();
-  return <PostEditor categories={categories} />;
+  const [categories, authors] = await Promise.all([
+    getCategories(),
+    getAuthors(),
+  ]);
+  return <PostEditor categories={categories} authors={authors} />;
 }

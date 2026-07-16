@@ -26,6 +26,15 @@ create table if not exists public.tags (
   created_at timestamptz not null default now()
 );
 
+create table if not exists public.authors (
+  id         uuid primary key default gen_random_uuid(),
+  name       text not null,
+  role       text,
+  bio        text,
+  avatar_url text,
+  created_at timestamptz not null default now()
+);
+
 create table if not exists public.posts (
   id               uuid primary key default gen_random_uuid(),
   title            text not null,
@@ -34,6 +43,7 @@ create table if not exists public.posts (
   content          text not null default '',
   featured_image   text,
   category_id      uuid references public.categories(id) on delete set null,
+  author_id        uuid references public.authors(id) on delete set null,
   status           text not null default 'draft'
                      check (status in ('draft','published','archived')),
   meta_title       text,
@@ -148,11 +158,18 @@ $$;
 
 alter table public.categories enable row level security;
 alter table public.tags       enable row level security;
+alter table public.authors    enable row level security;
 alter table public.posts      enable row level security;
 alter table public.post_tags  enable row level security;
 alter table public.comments   enable row level security;
 alter table public.media      enable row level security;
 alter table public.settings   enable row level security;
+
+-- Authors: public read, admin write.
+create policy "authors_public_read" on public.authors
+  for select using (true);
+create policy "authors_admin_write" on public.authors
+  for all to authenticated using (true) with check (true);
 
 -- Categories: public read, admin write.
 create policy "categories_public_read" on public.categories

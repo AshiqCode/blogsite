@@ -70,30 +70,14 @@ export function MediaLibrary({ initialItems }: { initialItems: MediaItem[] }) {
       ) : (
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4">
           {items.map((m) => (
-            <button
+            <MediaCard
               key={m.id}
-              onClick={() => setSelected(m)}
-              className="group overflow-hidden rounded-lg border border-border bg-white text-left"
-            >
-              <div className="relative aspect-square bg-zinc-50">
-                {m.mime_type?.startsWith("image/") ? (
-                  <Image
-                    src={m.url}
-                    alt={m.alt_text ?? m.file_name}
-                    fill
-                    sizes="200px"
-                    className="object-cover"
-                  />
-                ) : (
-                  <div className="flex h-full items-center justify-center text-xs text-zinc-400">
-                    {m.file_name.split(".").pop()?.toUpperCase()}
-                  </div>
-                )}
-              </div>
-              <p className="truncate px-2 py-1.5 text-xs text-zinc-600">
-                {m.file_name}
-              </p>
-            </button>
+              item={m}
+              onOpen={() => setSelected(m)}
+              onDeleted={(id) =>
+                setItems((prev) => prev.filter((i) => i.id !== id))
+              }
+            />
           ))}
         </div>
       )}
@@ -114,6 +98,81 @@ export function MediaLibrary({ initialItems }: { initialItems: MediaItem[] }) {
           }}
         />
       )}
+    </div>
+  );
+}
+
+function MediaCard({
+  item,
+  onOpen,
+  onDeleted,
+}: {
+  item: MediaItem;
+  onOpen: () => void;
+  onDeleted: (id: string) => void;
+}) {
+  const [copied, setCopied] = useState(false);
+  const [pending, startTransition] = useTransition();
+
+  return (
+    <div className="group overflow-hidden rounded-lg border border-border bg-white">
+      <button
+        type="button"
+        onClick={onOpen}
+        className="block w-full"
+        title="Open details"
+      >
+        <div className="relative aspect-square bg-zinc-50">
+          {item.mime_type?.startsWith("image/") ? (
+            <Image
+              src={item.url}
+              alt={item.alt_text ?? item.file_name}
+              fill
+              sizes="200px"
+              className="object-cover"
+            />
+          ) : (
+            <div className="flex h-full items-center justify-center text-xs text-zinc-400">
+              {item.file_name.split(".").pop()?.toUpperCase()}
+            </div>
+          )}
+        </div>
+      </button>
+      <p className="truncate px-2 pt-1.5 text-xs text-zinc-600" title={item.file_name}>
+        {item.file_name}
+      </p>
+      <div className="flex items-center gap-1 px-1.5 pb-1.5 pt-1">
+        <button
+          type="button"
+          onClick={async () => {
+            try {
+              await navigator.clipboard.writeText(item.url);
+              setCopied(true);
+              setTimeout(() => setCopied(false), 1500);
+            } catch {
+              /* clipboard unavailable */
+            }
+          }}
+          className="flex-1 rounded-md bg-zinc-100 px-2 py-1 text-xs font-medium text-zinc-700 hover:bg-zinc-200"
+        >
+          {copied ? "Copied!" : "Copy URL"}
+        </button>
+        <button
+          type="button"
+          disabled={pending}
+          onClick={() => {
+            if (confirm(`Delete “${item.file_name}”?`))
+              startTransition(async () => {
+                await deleteMedia(item.id, item.storage_path);
+                onDeleted(item.id);
+              });
+          }}
+          className="rounded-md px-2 py-1 text-xs font-medium text-red-600 hover:bg-red-50 disabled:opacity-50"
+          title="Delete"
+        >
+          ✕
+        </button>
+      </div>
     </div>
   );
 }

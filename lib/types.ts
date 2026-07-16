@@ -19,6 +19,15 @@ export interface Tag {
   created_at: string;
 }
 
+export interface Author {
+  id: string;
+  name: string;
+  role: string | null;
+  bio: string | null;
+  avatar_url: string | null;
+  created_at: string;
+}
+
 export interface Post {
   id: string;
   title: string;
@@ -27,6 +36,7 @@ export interface Post {
   content: string; // sanitized HTML
   featured_image: string | null;
   category_id: string | null;
+  author_id: string | null;
   status: PostStatus;
   meta_title: string | null;
   meta_description: string | null;
@@ -38,6 +48,7 @@ export interface Post {
 
 export interface PostWithRelations extends Post {
   category: Category | null;
+  author: Author | null;
   tags: Tag[];
 }
 
