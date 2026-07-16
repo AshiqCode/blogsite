@@ -1,49 +1,49 @@
 "use client";
 
-import { useState } from "react";
+import { useActionState, useEffect, useRef } from "react";
+import { sendContactMessage, type ContactState } from "@/app/(site)/contact/actions";
 
-/**
- * Lightweight, backend-free contact form: composes a pre-filled email and opens
- * the visitor's mail client. Reliable with no server/table required. If no
- * contact email is configured, it explains that instead.
- */
-export function ContactForm({
-  toEmail,
-  siteTitle,
-}: {
-  toEmail: string | null;
-  siteTitle: string;
-}) {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [message, setMessage] = useState("");
+const initial: ContactState = { ok: false };
 
-  if (!toEmail) {
-    return (
-      <div className="card-soft p-6 text-center text-sm text-muted">
-        A contact email hasn’t been configured yet. The site owner can add one in
-        the admin dashboard under <strong>Settings → Contact</strong>.
-      </div>
-    );
-  }
+export function ContactForm() {
+  const [state, formAction, pending] = useActionState(
+    sendContactMessage,
+    initial,
+  );
+  const formRef = useRef<HTMLFormElement>(null);
 
-  function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    const subject = `Message from ${name || "a visitor"} · ${siteTitle}`;
-    const body = `Name: ${name}\nEmail: ${email}\n\n${message}`;
-    window.location.href = `mailto:${toEmail}?subject=${encodeURIComponent(
-      subject,
-    )}&body=${encodeURIComponent(body)}`;
-  }
+  useEffect(() => {
+    if (state.ok) formRef.current?.reset();
+  }, [state.ok]);
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
+    <form ref={formRef} action={formAction} className="space-y-4">
+      {/* Honeypot */}
+      <input
+        type="text"
+        name="company"
+        tabIndex={-1}
+        autoComplete="off"
+        className="hidden"
+        aria-hidden="true"
+      />
+
+      {state.ok && (
+        <p className="rounded-lg bg-green-50 px-4 py-3 text-sm text-green-700">
+          Thanks! Your message has been sent — we’ll get back to you soon.
+        </p>
+      )}
+      {state.error && (
+        <p className="rounded-lg bg-red-50 px-4 py-3 text-sm text-red-700">
+          {state.error}
+        </p>
+      )}
+
       <div className="grid gap-4 sm:grid-cols-2">
         <div>
           <label className="mb-1 block text-sm font-semibold">Your name</label>
           <input
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            name="name"
             required
             className="w-full rounded-lg border border-border bg-surface px-4 py-2.5 text-sm outline-none focus:border-accent"
           />
@@ -51,9 +51,8 @@ export function ContactForm({
         <div>
           <label className="mb-1 block text-sm font-semibold">Your email</label>
           <input
+            name="email"
             type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
             required
             className="w-full rounded-lg border border-border bg-surface px-4 py-2.5 text-sm outline-none focus:border-accent"
           />
@@ -62,8 +61,7 @@ export function ContactForm({
       <div>
         <label className="mb-1 block text-sm font-semibold">Message</label>
         <textarea
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
+          name="message"
           required
           rows={6}
           className="w-full resize-y rounded-lg border border-border bg-surface px-4 py-2.5 text-sm outline-none focus:border-accent"
@@ -71,13 +69,11 @@ export function ContactForm({
       </div>
       <button
         type="submit"
-        className="rounded-lg bg-accent px-6 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-accent-hover"
+        disabled={pending}
+        className="rounded-lg bg-accent px-6 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-accent-hover disabled:opacity-60"
       >
-        Send message
+        {pending ? "Sending…" : "Send message"}
       </button>
-      <p className="text-xs text-muted">
-        This opens your email app with the message pre-filled.
-      </p>
     </form>
   );
 }

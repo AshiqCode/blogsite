@@ -84,7 +84,7 @@ export default async function ContactPage() {
         </div>
       )}
 
-      <ContactForm toEmail={settings.contact_email} siteTitle={settings.site_title} />
+      <ContactForm />
     </div>
   );
 }
