@@ -1,0 +1,209 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   Warm & cozy minimal design system — cream canvas, terracotta accent,
+   soft shadows, rounded surfaces, serif display + rounded humanist body.
+   ========================================================================== */
+
+:root {
+  /* Fonts are loaded via <link> in app/layout.tsx (runtime, Google Fonts CDN),
+     with graceful system fallbacks if unavailable. */
+  --font-body: "Nunito Sans", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-display: "Fraunces", Georgia, "Times New Roman", serif;
+
+  --background: #faf5ee; /* warm cream canvas */
+  --surface: #fffdf9; /* cards / raised surfaces */
+  --surface-2: #f4ebe0; /* subtle warm fill */
+  --foreground: #2a2320; /* warm near-black ink */
+  --muted: #8c8075; /* warm taupe */
+  --border: #ece0d2; /* soft sand */
+  --border-strong: #ddccb8;
+  --accent: #c25a37; /* terracotta */
+  --accent-hover: #a84829;
+  --accent-soft: #f3e2d6; /* accent tint bg */
+  --amber: #d9932f; /* warm amber highlight */
+  --shadow-soft: 0 1px 2px rgba(74, 46, 30, 0.04),
+    0 8px 24px rgba(74, 46, 30, 0.06);
+  --shadow-lift: 0 2px 4px rgba(74, 46, 30, 0.05),
+    0 16px 40px rgba(74, 46, 30, 0.1);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-soft: var(--accent-soft);
+  --color-amber: var(--amber);
+
+  --font-sans: var(--font-body);
+  --font-display: var(--font-display);
+  --font-mono: ui-monospace, "SF Mono", "Cascadia Code", "Fira Code", monospace;
+
+  --shadow-soft: var(--shadow-soft);
+  --shadow-lift: var(--shadow-lift);
+
+  --radius-xl: 1rem;
+  --radius-2xl: 1.25rem;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+  /* faint warm glow behind the page */
+  background-image: radial-gradient(
+      60rem 40rem at 50% -10rem,
+      rgba(217, 147, 47, 0.08),
+      transparent 60%
+    );
+  background-attachment: fixed;
+}
+
+::selection {
+  background: var(--accent-soft);
+  color: var(--accent-hover);
+}
+
+.font-display {
+  font-family: var(--font-display), Georgia, "Times New Roman", serif;
+  font-optical-sizing: auto;
+}
+
+/* --------------------------------------------------------------------------
+   Article / rich-text content
+   -------------------------------------------------------------------------- */
+.prose-content {
+  line-height: 1.8;
+  font-size: 1.1rem;
+  color: #3a322c;
+}
+.prose-content > * + * {
+  margin-top: 1.3em;
+}
+.prose-content h2,
+.prose-content h3,
+.prose-content h4 {
+  font-family: var(--font-display), Georgia, serif;
+  color: var(--foreground);
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+}
+.prose-content h2 {
+  font-size: 1.75rem;
+  font-weight: 600;
+  margin-top: 2em;
+}
+.prose-content h3 {
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-top: 1.6em;
+}
+.prose-content p {
+  margin: 0;
+}
+.prose-content a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  text-decoration-color: color-mix(in srgb, var(--accent) 40%, transparent);
+  transition: text-decoration-color 0.2s;
+}
+.prose-content a:hover {
+  text-decoration-color: var(--accent);
+}
+.prose-content ul,
+.prose-content ol {
+  padding-left: 1.5rem;
+}
+.prose-content ul {
+  list-style: none;
+}
+.prose-content ul > li {
+  position: relative;
+}
+.prose-content ul > li::before {
+  content: "";
+  position: absolute;
+  left: -1.1rem;
+  top: 0.7em;
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--accent);
+}
+.prose-content ol {
+  list-style: decimal;
+}
+.prose-content li + li {
+  margin-top: 0.4em;
+}
+.prose-content blockquote {
+  border-left: 3px solid var(--accent);
+  background: var(--surface-2);
+  border-radius: 0 0.75rem 0.75rem 0;
+  padding: 0.75rem 1.25rem;
+  color: #5b5148;
+  font-family: var(--font-display), Georgia, serif;
+  font-style: italic;
+  font-size: 1.15rem;
+}
+.prose-content img {
+  border-radius: 0.9rem;
+  max-width: 100%;
+  height: auto;
+  box-shadow: var(--shadow-soft);
+}
+.prose-content pre {
+  background: #2a2320;
+  color: #f3e9dc;
+  padding: 1.1rem 1.25rem;
+  border-radius: 0.9rem;
+  overflow-x: auto;
+  font-family: var(--font-mono), monospace;
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+.prose-content code {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.9em;
+}
+.prose-content :not(pre) > code {
+  background: var(--accent-soft);
+  color: var(--accent-hover);
+  padding: 0.15em 0.45em;
+  border-radius: 0.4rem;
+}
+.prose-content hr {
+  border: none;
+  height: 1px;
+  background: var(--border-strong);
+  margin: 2.5em auto;
+  width: 40%;
+}
+
+/* Tiptap editor placeholder + focus */
+.tiptap p.is-editor-empty:first-child::before {
+  content: attr(data-placeholder);
+  float: left;
+  color: var(--muted);
+  pointer-events: none;
+  height: 0;
+}
+.tiptap:focus {
+  outline: none;
+}
+
+/* Utility: soft card */
+.card-soft {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-2xl);
+  box-shadow: var(--shadow-soft);
+}
