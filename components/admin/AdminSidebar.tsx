@@ -67,12 +67,6 @@ export function AdminSidebar({ userEmail }: { userEmail: string }) {
           </svg>
         </button>
         <span className="min-w-0 flex-1 truncate font-semibold">{current}</span>
-        <Link
-          href="/admin/posts/new"
-          className="rounded-lg bg-accent px-3 py-1.5 text-sm font-semibold text-white"
-        >
-          + New
-        </Link>
       </div>
 
       <aside
