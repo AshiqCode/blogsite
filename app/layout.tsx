@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import Script from "next/script";
+import NextTopLoader from "nextjs-toploader";
 import "./globals.css";
 import { getSettings } from "@/lib/queries";
 import { siteUrl, absoluteUrl } from "@/lib/site";
@@ -139,6 +140,14 @@ export default async function RootLayout({
         />
       </head>
       <body className="min-h-full flex flex-col">
+        <NextTopLoader
+          color="#c25a37"
+          height={3}
+          showSpinner={false}
+          shadow="0 0 8px #c25a37, 0 0 4px #c25a37"
+          easing="ease"
+          speed={300}
+        />
         {children}
 
         <script
