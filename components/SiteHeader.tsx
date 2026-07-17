@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { getCategories, getSettings } from "@/lib/queries";
 import { SearchBox } from "@/components/SearchBox";
+import { SiteNav } from "@/components/SiteNav";
 
 export async function SiteHeader() {
   const [settings, categories] = await Promise.all([
@@ -33,29 +34,13 @@ export async function SiteHeader() {
           )}
         </Link>
 
-        <nav className="hidden items-center gap-1 text-sm font-semibold text-muted sm:flex">
-          <Link
-            href="/"
-            className="rounded-full px-3 py-1.5 transition-colors hover:bg-surface-2 hover:text-foreground"
-          >
-            Home
-          </Link>
-          {categories.slice(0, 4).map((c) => (
-            <Link
-              key={c.id}
-              href={`/category/${c.slug}`}
-              className="rounded-full px-3 py-1.5 transition-colors hover:bg-surface-2 hover:text-foreground"
-            >
-              {c.name}
-            </Link>
-          ))}
-          <Link
-            href="/about"
-            className="rounded-full px-3 py-1.5 transition-colors hover:bg-surface-2 hover:text-foreground"
-          >
-            About
-          </Link>
-        </nav>
+        <SiteNav
+          categories={categories.map((c) => ({
+            id: c.id,
+            slug: c.slug,
+            name: c.name,
+          }))}
+        />
 
         <div className="ml-auto">
           <SearchBox />
