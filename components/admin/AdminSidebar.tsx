@@ -14,6 +14,7 @@ const NAV = [
   { href: "/admin/media", label: "Media Library" },
   { href: "/admin/comments", label: "Comments" },
   { href: "/admin/analytics", label: "Analytics" },
+  { href: "/admin/health", label: "SEO Health" },
   { href: "/admin/settings", label: "Settings" },
 ];
 
