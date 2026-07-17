@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { getSettings } from "@/lib/queries";
+import { PushToggle } from "@/components/PushToggle";
 
 function SocialLink({ href, label }: { href: string; label: string }) {
   return (
@@ -42,6 +43,9 @@ export async function SiteFooter() {
                 {settings.tagline}
               </p>
             )}
+            <div className="mt-4">
+              <PushToggle />
+            </div>
           </div>
 
           <div className="flex flex-col gap-4">

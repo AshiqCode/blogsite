@@ -6,7 +6,22 @@ import { createClient } from "@/lib/supabase/server";
 import { requireAdmin } from "@/lib/auth";
 import { makeExcerpt, slugify } from "@/lib/utils";
 import { sanitizeHtml } from "@/lib/sanitize";
+import { broadcastPush } from "@/lib/push";
+import { getSettings } from "@/lib/queries";
+import { absoluteUrl } from "@/lib/site";
 import type { PostStatus } from "@/lib/types";
+
+/** Notify all subscribers about a newly published post. */
+async function notifyNewPost(title: string, slug: string, excerpt: string | null) {
+  const settings = await getSettings();
+  await broadcastPush({
+    title: `New post: ${title}`,
+    body: excerpt || `Read the latest from ${settings.site_title}.`,
+    url: absoluteUrl(`/post/${slug}`),
+    icon: settings.logo_url || settings.favicon_url || undefined,
+    tag: `post-${slug}`,
+  });
+}
 
 export interface PostFormState {
   error?: string;
@@ -93,6 +108,17 @@ export async function savePost(
           : null,
   };
 
+  // Was this post already published before this save?
+  let wasPublished = false;
+  if (id) {
+    const { data: existing } = await supabase
+      .from("posts")
+      .select("status")
+      .eq("id", id)
+      .single();
+    wasPublished = existing?.status === "published";
+  }
+
   let postId = id;
   if (id) {
     const { error } = await supabase.from("posts").update(record).eq("id", id);
@@ -105,6 +131,11 @@ export async function savePost(
       .single();
     if (error || !data) return { error: "Failed to create post." };
     postId = data.id;
+  }
+
+  // Broadcast a push only when a post first becomes published.
+  if (record.status === "published" && !wasPublished) {
+    await notifyNewPost(title, slug, record.excerpt);
   }
 
   // Sync tags.
@@ -145,8 +176,21 @@ export async function setPostStatus(
 ): Promise<void> {
   await requireAdmin();
   const supabase = await createClient();
+
+  const { data: existing } = await supabase
+    .from("posts")
+    .select("status, title, slug, excerpt")
+    .eq("id", id)
+    .single();
+
   const patch: { status: PostStatus; published_at?: string } = { status };
   if (status === "published") patch.published_at = new Date().toISOString();
   await supabase.from("posts").update(patch).eq("id", id);
+
+  // Notify subscribers when a post first becomes published.
+  if (status === "published" && existing && existing.status !== "published") {
+    await notifyNewPost(existing.title, existing.slug, existing.excerpt);
+  }
+
   revalidatePublic();
 }

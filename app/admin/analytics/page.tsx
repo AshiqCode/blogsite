@@ -113,7 +113,8 @@ export default async function AnalyticsPage() {
             posts will appear here.
           </p>
         ) : (
-          <table className="w-full text-sm">
+          <div className="overflow-x-auto">
+          <table className="w-full min-w-[420px] text-sm">
             <thead className="border-b border-border text-left text-xs uppercase tracking-wide text-zinc-500">
               <tr>
                 <th className="px-2 py-2">#</th>
@@ -144,6 +145,7 @@ export default async function AnalyticsPage() {
               ))}
             </tbody>
           </table>
+          </div>
         )}
       </section>
     </div>

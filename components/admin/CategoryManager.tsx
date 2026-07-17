@@ -6,6 +6,7 @@ import {
   deleteCategory,
   type CategoryFormState,
 } from "@/app/admin/categories/actions";
+import { useConfirm } from "@/components/admin/ConfirmProvider";
 import type { Category } from "@/lib/types";
 
 const initial: CategoryFormState = {};
@@ -20,6 +21,7 @@ export function CategoryManager({
   const [editing, setEditing] = useState<Category | null>(null);
   const [state, formAction, pending] = useActionState(saveCategory, initial);
   const [, startTransition] = useTransition();
+  const confirm = useConfirm();
 
   // key forces the form to reset when switching between add/edit.
   const formKey = editing?.id ?? "new";
@@ -112,8 +114,8 @@ export function CategoryManager({
 
       {/* List */}
       <div className="lg:col-span-2">
-        <div className="overflow-hidden rounded-xl border border-border bg-white">
-          <table className="w-full text-sm">
+        <div className="overflow-x-auto rounded-xl border border-border bg-white">
+          <table className="w-full min-w-[480px] text-sm">
             <thead className="border-b border-border bg-zinc-50 text-left text-xs uppercase tracking-wide text-zinc-500">
               <tr>
                 <th className="px-4 py-3">Name</th>
@@ -146,8 +148,15 @@ export function CategoryManager({
                         Edit
                       </button>
                       <button
-                        onClick={() => {
-                          if (confirm(`Delete category “${c.name}”?`))
+                        onClick={async () => {
+                          if (
+                            await confirm({
+                              title: "Delete category",
+                              message: `Delete the category “${c.name}”? Posts in it will become uncategorized.`,
+                              confirmText: "Delete",
+                              danger: true,
+                            })
+                          )
                             startTransition(() => deleteCategory(c.id));
                         }}
                         className="text-red-600 hover:underline"

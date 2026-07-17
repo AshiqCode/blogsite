@@ -5,6 +5,7 @@ import { useRef, useState, useTransition } from "react";
 import { uploadMedia } from "@/lib/upload";
 import { deleteMedia, updateMedia } from "@/app/admin/media/actions";
 import { formatBytes, formatDate } from "@/lib/utils";
+import { useConfirm } from "@/components/admin/ConfirmProvider";
 import type { MediaItem } from "@/lib/types";
 
 export function MediaLibrary({ initialItems }: { initialItems: MediaItem[] }) {
@@ -113,6 +114,7 @@ function MediaCard({
 }) {
   const [copied, setCopied] = useState(false);
   const [pending, startTransition] = useTransition();
+  const confirm = useConfirm();
 
   return (
     <div className="group overflow-hidden rounded-lg border border-border bg-white">
@@ -160,8 +162,15 @@ function MediaCard({
         <button
           type="button"
           disabled={pending}
-          onClick={() => {
-            if (confirm(`Delete “${item.file_name}”?`))
+          onClick={async () => {
+            if (
+              await confirm({
+                title: "Delete file",
+                message: `Delete “${item.file_name}”? This removes it from storage permanently.`,
+                confirmText: "Delete",
+                danger: true,
+              })
+            )
               startTransition(async () => {
                 await deleteMedia(item.id, item.storage_path);
                 onDeleted(item.id);
@@ -192,6 +201,7 @@ function MediaDetail({
   const [caption, setCaption] = useState(item.caption ?? "");
   const [copied, setCopied] = useState(false);
   const [pending, startTransition] = useTransition();
+  const confirm = useConfirm();
 
   return (
     <div
@@ -268,8 +278,15 @@ function MediaDetail({
         <div className="mt-5 flex justify-between border-t border-border pt-4">
           <button
             disabled={pending}
-            onClick={() => {
-              if (confirm("Delete this file permanently?"))
+            onClick={async () => {
+              if (
+                await confirm({
+                  title: "Delete file",
+                  message: "Delete this file permanently? This cannot be undone.",
+                  confirmText: "Delete",
+                  danger: true,
+                })
+              )
                 startTransition(async () => {
                   await deleteMedia(item.id, item.storage_path);
                   onDeleted(item.id);

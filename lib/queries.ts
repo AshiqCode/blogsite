@@ -38,6 +38,7 @@ const DEFAULT_SETTINGS: SiteSettings = {
   author_name: null,
   author_bio: null,
   author_avatar: null,
+  comment_moderation: "manual",
   updated_at: new Date(0).toISOString(),
 };
 

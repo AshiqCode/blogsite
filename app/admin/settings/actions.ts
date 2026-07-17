@@ -45,6 +45,10 @@ export async function saveSettings(
     google_analytics_id: field(formData, "google_analytics_id"),
     google_verification: field(formData, "google_verification"),
     adsense_publisher_id: field(formData, "adsense_publisher_id"),
+    comment_moderation:
+      String(formData.get("comment_moderation") ?? "manual") === "auto"
+        ? "auto"
+        : "manual",
     updated_at: new Date().toISOString(),
   };
 

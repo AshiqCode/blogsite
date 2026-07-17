@@ -103,6 +103,7 @@ export interface SiteSettings {
   author_name: string | null;
   author_bio: string | null;
   author_avatar: string | null;
+  comment_moderation: "auto" | "manual";
   updated_at: string;
 }
 

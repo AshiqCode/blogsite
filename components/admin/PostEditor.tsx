@@ -38,11 +38,11 @@ export function PostEditor({
       {post && <input type="hidden" name="id" value={post.id} />}
       <input type="hidden" name="content" value={content} />
 
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <h1 className="text-2xl font-bold">
           {post ? "Edit Post" : "New Post"}
         </h1>
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2">
           <Link
             href="/admin/posts"
             className="rounded-lg border border-border bg-white px-4 py-2 text-sm font-medium hover:bg-zinc-100"

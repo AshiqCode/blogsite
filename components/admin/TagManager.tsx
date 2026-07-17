@@ -2,6 +2,7 @@
 
 import { useActionState, useEffect, useRef, useState, useTransition } from "react";
 import { saveTag, deleteTag, type TagFormState } from "@/app/admin/tags/actions";
+import { useConfirm } from "@/components/admin/ConfirmProvider";
 import type { Tag } from "@/lib/types";
 
 const initial: TagFormState = {};
@@ -16,6 +17,7 @@ export function TagManager({
   const [editing, setEditing] = useState<Tag | null>(null);
   const [state, formAction, pending] = useActionState(saveTag, initial);
   const [, startTransition] = useTransition();
+  const confirm = useConfirm();
   const formRef = useRef<HTMLFormElement>(null);
 
   useEffect(() => {
@@ -110,8 +112,15 @@ export function TagManager({
                 </button>
                 <span className="text-xs text-zinc-400">{counts[t.id] ?? 0}</span>
                 <button
-                  onClick={() => {
-                    if (confirm(`Delete tag “${t.name}”?`))
+                  onClick={async () => {
+                    if (
+                      await confirm({
+                        title: "Delete tag",
+                        message: `Delete the tag “${t.name}”?`,
+                        confirmText: "Delete",
+                        danger: true,
+                      })
+                    )
                       startTransition(() => deleteTag(t.id));
                   }}
                   className="rounded-full px-1.5 text-zinc-400 hover:bg-red-50 hover:text-red-600"

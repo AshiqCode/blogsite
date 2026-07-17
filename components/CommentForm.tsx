@@ -1,6 +1,7 @@
 "use client";
 
-import { useActionState, useEffect, useRef } from "react";
+import { useActionState, useEffect, useRef, useState } from "react";
+import { useRouter } from "next/navigation";
 import { submitComment, type CommentFormState } from "@/app/(site)/post/[slug]/actions";
 
 const initial: CommentFormState = { ok: false };
@@ -8,14 +9,31 @@ const initial: CommentFormState = { ok: false };
 export function CommentForm({ postId }: { postId: string }) {
   const [state, formAction, pending] = useActionState(submitComment, initial);
   const formRef = useRef<HTMLFormElement>(null);
+  const [endpoint, setEndpoint] = useState("");
+  const router = useRouter();
 
   useEffect(() => {
-    if (state.ok) formRef.current?.reset();
-  }, [state.ok]);
+    // Link this comment to the visitor's push subscription (if any), so we can
+    // notify them when it's approved.
+    try {
+      setEndpoint(localStorage.getItem("push-endpoint") ?? "");
+    } catch {
+      /* ignore */
+    }
+  }, []);
+
+  useEffect(() => {
+    if (state.ok) {
+      formRef.current?.reset();
+      // If auto-approved, refresh so the new comment shows immediately.
+      if (state.autoApproved) router.refresh();
+    }
+  }, [state.ok, state.autoApproved, router]);
 
   return (
     <form ref={formRef} action={formAction} className="space-y-4">
       <input type="hidden" name="post_id" value={postId} />
+      <input type="hidden" name="subscriber_endpoint" value={endpoint} />
       {/* Honeypot */}
       <input
         type="text"
@@ -28,7 +46,9 @@ export function CommentForm({ postId }: { postId: string }) {
 
       {state.ok && (
         <p className="rounded-lg bg-green-50 px-4 py-3 text-sm text-green-700">
-          Thanks! Your comment was submitted and is awaiting approval.
+          {state.autoApproved
+            ? "Thanks! Your comment has been posted."
+            : "Thanks! Your comment was submitted and is awaiting approval."}
         </p>
       )}
       {state.error && (

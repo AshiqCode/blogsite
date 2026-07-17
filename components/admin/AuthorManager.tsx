@@ -7,6 +7,7 @@ import {
   deleteAuthor,
   type AuthorFormState,
 } from "@/app/admin/authors/actions";
+import { useConfirm } from "@/components/admin/ConfirmProvider";
 import type { Author } from "@/lib/types";
 
 const initial: AuthorFormState = {};
@@ -21,6 +22,7 @@ export function AuthorManager({
   const [editing, setEditing] = useState<Author | null>(null);
   const [state, formAction, pending] = useActionState(saveAuthor, initial);
   const [, startTransition] = useTransition();
+  const confirm = useConfirm();
 
   useEffect(() => {
     if (state.ok) setEditing(null);
@@ -161,11 +163,14 @@ export function AuthorManager({
                     Edit
                   </button>
                   <button
-                    onClick={() => {
+                    onClick={async () => {
                       if (
-                        confirm(
-                          `Delete author “${a.name}”? Their posts will remain but become unassigned.`,
-                        )
+                        await confirm({
+                          title: "Delete author",
+                          message: `Delete the author “${a.name}”? Their posts will remain but become unassigned.`,
+                          confirmText: "Delete",
+                          danger: true,
+                        })
                       )
                         startTransition(() => deleteAuthor(a.id));
                     }}

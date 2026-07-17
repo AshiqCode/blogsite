@@ -9,6 +9,7 @@ import {
   replyToComment,
 } from "@/app/admin/comments/actions";
 import { formatDate } from "@/lib/utils";
+import { useConfirm } from "@/components/admin/ConfirmProvider";
 import type { Comment } from "@/lib/types";
 
 const statusBadge: Record<string, string> = {
@@ -30,6 +31,7 @@ export function CommentRow({
   const [mode, setMode] = useState<"view" | "edit" | "reply">("view");
   const [editValue, setEditValue] = useState(comment.content);
   const [replyValue, setReplyValue] = useState("");
+  const confirm = useConfirm();
 
   return (
     <div className="rounded-xl border border-border bg-white p-4">
@@ -182,8 +184,15 @@ export function CommentRow({
           )}
           <button
             disabled={pending}
-            onClick={() => {
-              if (confirm("Permanently delete this comment?"))
+            onClick={async () => {
+              if (
+                await confirm({
+                  title: "Delete comment",
+                  message: "Permanently delete this comment? This cannot be undone.",
+                  confirmText: "Delete",
+                  danger: true,
+                })
+              )
                 startTransition(() => deleteComment(comment.id));
             }}
             className="font-medium text-red-600 hover:underline disabled:opacity-50"

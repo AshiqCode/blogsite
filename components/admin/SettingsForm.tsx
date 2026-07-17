@@ -96,6 +96,51 @@ export function SettingsForm({ settings }: { settings: SiteSettings }) {
       </Section>
 
       <fieldset className="rounded-xl border border-border bg-white p-5">
+        <legend className="px-1 text-sm font-semibold">Comments</legend>
+        <p className="mb-3 text-sm text-zinc-500">
+          Choose how new visitor comments are handled.
+        </p>
+        <div className="space-y-3">
+          <label className="flex cursor-pointer items-start gap-3 rounded-lg border border-border p-3 hover:bg-zinc-50">
+            <input
+              type="radio"
+              name="comment_moderation"
+              value="manual"
+              defaultChecked={settings.comment_moderation !== "auto"}
+              className="mt-1"
+            />
+            <span>
+              <span className="block text-sm font-semibold">
+                Manual approval (human in the loop)
+              </span>
+              <span className="block text-sm text-zinc-500">
+                New comments stay pending until you approve them. Safest against
+                spam.
+              </span>
+            </span>
+          </label>
+          <label className="flex cursor-pointer items-start gap-3 rounded-lg border border-border p-3 hover:bg-zinc-50">
+            <input
+              type="radio"
+              name="comment_moderation"
+              value="auto"
+              defaultChecked={settings.comment_moderation === "auto"}
+              className="mt-1"
+            />
+            <span>
+              <span className="block text-sm font-semibold">
+                Auto-approve
+              </span>
+              <span className="block text-sm text-zinc-500">
+                Comments appear immediately without review. Convenient, but more
+                exposed to spam.
+              </span>
+            </span>
+          </label>
+        </div>
+      </fieldset>
+
+      <fieldset className="rounded-xl border border-border bg-white p-5">
         <legend className="px-1 text-sm font-semibold">Footer</legend>
         <input
           name="footer_text"
