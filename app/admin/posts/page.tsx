@@ -63,71 +63,112 @@ export default async function PostsPage({
         })}
       </div>
 
-      <div className="overflow-x-auto rounded-xl border border-border bg-white">
-        <table className="w-full min-w-[640px] text-sm">
-          <thead className="border-b border-border bg-zinc-50 text-left text-xs uppercase tracking-wide text-zinc-500">
-            <tr>
-              <th className="px-4 py-3">Title</th>
-              <th className="hidden px-4 py-3 sm:table-cell">Category</th>
-              <th className="px-4 py-3">Status</th>
-              <th className="hidden px-4 py-3 md:table-cell">Views</th>
-              <th className="hidden px-4 py-3 md:table-cell">Date</th>
-              <th className="px-4 py-3 text-right">Actions</th>
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-border">
-            {(!posts || posts.length === 0) && (
-              <tr>
-                <td colSpan={6} className="px-4 py-10 text-center text-zinc-500">
-                  No posts found.{" "}
-                  <Link href="/admin/posts/new" className="text-accent hover:underline">
-                    Create your first post
-                  </Link>
-                  .
-                </td>
-              </tr>
-            )}
-            {posts?.map((p) => {
+      {!posts || posts.length === 0 ? (
+        <div className="rounded-xl border border-border bg-white px-4 py-12 text-center text-zinc-500">
+          No posts found.{" "}
+          <Link href="/admin/posts/new" className="text-accent hover:underline">
+            Create your first post
+          </Link>
+          .
+        </div>
+      ) : (
+        <>
+          {/* Desktop table */}
+          <div className="hidden overflow-hidden rounded-xl border border-border bg-white md:block">
+            <table className="w-full text-sm">
+              <thead className="border-b border-border bg-zinc-50 text-left text-xs uppercase tracking-wide text-zinc-500">
+                <tr>
+                  <th className="px-4 py-3">Title</th>
+                  <th className="px-4 py-3">Category</th>
+                  <th className="px-4 py-3">Status</th>
+                  <th className="px-4 py-3">Views</th>
+                  <th className="px-4 py-3">Date</th>
+                  <th className="px-4 py-3 text-right">Actions</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-border">
+                {posts.map((p) => {
+                  const category = p.category as unknown as { name: string } | null;
+                  return (
+                    <tr key={p.id} className="hover:bg-zinc-50">
+                      <td className="px-4 py-3">
+                        <Link
+                          href={`/admin/posts/${p.id}/edit`}
+                          className="font-medium hover:text-accent"
+                        >
+                          {p.title}
+                        </Link>
+                      </td>
+                      <td className="px-4 py-3 text-zinc-500">
+                        {category?.name ?? "—"}
+                      </td>
+                      <td className="px-4 py-3">
+                        <span
+                          className={`rounded-full px-2 py-0.5 text-xs font-medium capitalize ${statusBadge[p.status]}`}
+                        >
+                          {p.status}
+                        </span>
+                      </td>
+                      <td className="px-4 py-3 text-zinc-500">{p.views}</td>
+                      <td className="px-4 py-3 text-zinc-500">
+                        {formatDate(p.published_at ?? p.created_at)}
+                      </td>
+                      <td className="px-4 py-3">
+                        <PostRowActions
+                          id={p.id}
+                          slug={p.slug}
+                          status={p.status as PostStatus}
+                        />
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+
+          {/* Mobile cards */}
+          <div className="space-y-3 md:hidden">
+            {posts.map((p) => {
               const category = p.category as unknown as { name: string } | null;
               return (
-                <tr key={p.id} className="hover:bg-zinc-50">
-                  <td className="px-4 py-3">
+                <div
+                  key={p.id}
+                  className="rounded-xl border border-border bg-white p-4"
+                >
+                  <div className="flex items-start justify-between gap-2">
                     <Link
                       href={`/admin/posts/${p.id}/edit`}
-                      className="font-medium hover:text-accent"
+                      className="font-semibold leading-snug hover:text-accent"
                     >
                       {p.title}
                     </Link>
-                  </td>
-                  <td className="hidden px-4 py-3 text-zinc-500 sm:table-cell">
-                    {category?.name ?? "—"}
-                  </td>
-                  <td className="px-4 py-3">
                     <span
-                      className={`rounded-full px-2 py-0.5 text-xs font-medium capitalize ${statusBadge[p.status]}`}
+                      className={`shrink-0 rounded-full px-2 py-0.5 text-xs font-medium capitalize ${statusBadge[p.status]}`}
                     >
                       {p.status}
                     </span>
-                  </td>
-                  <td className="hidden px-4 py-3 text-zinc-500 md:table-cell">
-                    {p.views}
-                  </td>
-                  <td className="hidden px-4 py-3 text-zinc-500 md:table-cell">
-                    {formatDate(p.published_at ?? p.created_at)}
-                  </td>
-                  <td className="px-4 py-3">
+                  </div>
+                  <div className="mt-1.5 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-zinc-500">
+                    <span>{category?.name ?? "Uncategorized"}</span>
+                    <span aria-hidden>·</span>
+                    <span>{p.views} views</span>
+                    <span aria-hidden>·</span>
+                    <span>{formatDate(p.published_at ?? p.created_at)}</span>
+                  </div>
+                  <div className="mt-3 border-t border-border pt-3">
                     <PostRowActions
                       id={p.id}
                       slug={p.slug}
                       status={p.status as PostStatus}
                     />
-                  </td>
-                </tr>
+                  </div>
+                </div>
               );
             })}
-          </tbody>
-        </table>
-      </div>
+          </div>
+        </>
+      )}
     </div>
   );
 }
