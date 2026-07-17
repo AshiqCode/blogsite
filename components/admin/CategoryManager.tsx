@@ -26,6 +26,20 @@ export function CategoryManager({
   // key forces the form to reset when switching between add/edit.
   const formKey = editing?.id ?? "new";
 
+  function askDelete(c: Category) {
+    void (async () => {
+      if (
+        await confirm({
+          title: "Delete category",
+          message: `Delete the category “${c.name}”? Posts in it will become uncategorized.`,
+          confirmText: "Delete",
+          danger: true,
+        })
+      )
+        startTransition(() => deleteCategory(c.id));
+    })();
+  }
+
   useEffect(() => {
     if (state.ok) setEditing(null);
   }, [state.ok]);
@@ -114,62 +128,88 @@ export function CategoryManager({
 
       {/* List */}
       <div className="lg:col-span-2">
-        <div className="overflow-x-auto rounded-xl border border-border bg-white">
-          <table className="w-full min-w-[480px] text-sm">
-            <thead className="border-b border-border bg-zinc-50 text-left text-xs uppercase tracking-wide text-zinc-500">
-              <tr>
-                <th className="px-4 py-3">Name</th>
-                <th className="px-4 py-3">Slug</th>
-                <th className="px-4 py-3">Posts</th>
-                <th className="px-4 py-3 text-right">Actions</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-border">
-              {categories.length === 0 && (
-                <tr>
-                  <td colSpan={4} className="px-4 py-8 text-center text-zinc-500">
-                    No categories yet.
-                  </td>
-                </tr>
-              )}
+        {categories.length === 0 ? (
+          <div className="rounded-xl border border-border bg-white px-4 py-10 text-center text-zinc-500">
+            No categories yet.
+          </div>
+        ) : (
+          <>
+            {/* Desktop table */}
+            <div className="hidden overflow-hidden rounded-xl border border-border bg-white sm:block">
+              <table className="w-full text-sm">
+                <thead className="border-b border-border bg-zinc-50 text-left text-xs uppercase tracking-wide text-zinc-500">
+                  <tr>
+                    <th className="px-4 py-3">Name</th>
+                    <th className="px-4 py-3">Slug</th>
+                    <th className="px-4 py-3">Posts</th>
+                    <th className="px-4 py-3 text-right">Actions</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-border">
+                  {categories.map((c) => (
+                    <tr key={c.id} className="hover:bg-zinc-50">
+                      <td className="px-4 py-3 font-medium">{c.name}</td>
+                      <td className="px-4 py-3 font-mono text-xs text-zinc-500">
+                        {c.slug}
+                      </td>
+                      <td className="px-4 py-3 text-zinc-500">
+                        {counts[c.id] ?? 0}
+                      </td>
+                      <td className="px-4 py-3 text-right">
+                        <div className="flex justify-end gap-3">
+                          <button
+                            onClick={() => setEditing(c)}
+                            className="text-accent hover:underline"
+                          >
+                            Edit
+                          </button>
+                          <button
+                            onClick={() => askDelete(c)}
+                            className="text-red-600 hover:underline"
+                          >
+                            Delete
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+
+            {/* Mobile cards */}
+            <div className="space-y-3 sm:hidden">
               {categories.map((c) => (
-                <tr key={c.id} className="hover:bg-zinc-50">
-                  <td className="px-4 py-3 font-medium">{c.name}</td>
-                  <td className="px-4 py-3 font-mono text-xs text-zinc-500">
-                    {c.slug}
-                  </td>
-                  <td className="px-4 py-3 text-zinc-500">{counts[c.id] ?? 0}</td>
-                  <td className="px-4 py-3 text-right">
-                    <div className="flex justify-end gap-3">
-                      <button
-                        onClick={() => setEditing(c)}
-                        className="text-accent hover:underline"
-                      >
-                        Edit
-                      </button>
-                      <button
-                        onClick={async () => {
-                          if (
-                            await confirm({
-                              title: "Delete category",
-                              message: `Delete the category “${c.name}”? Posts in it will become uncategorized.`,
-                              confirmText: "Delete",
-                              danger: true,
-                            })
-                          )
-                            startTransition(() => deleteCategory(c.id));
-                        }}
-                        className="text-red-600 hover:underline"
-                      >
-                        Delete
-                      </button>
-                    </div>
-                  </td>
-                </tr>
+                <div
+                  key={c.id}
+                  className="rounded-xl border border-border bg-white p-4"
+                >
+                  <div className="flex items-center justify-between gap-2">
+                    <span className="font-semibold">{c.name}</span>
+                    <span className="shrink-0 rounded-full bg-zinc-100 px-2 py-0.5 text-xs text-zinc-600">
+                      {counts[c.id] ?? 0} posts
+                    </span>
+                  </div>
+                  <p className="mt-1 font-mono text-xs text-zinc-500">{c.slug}</p>
+                  <div className="mt-3 flex gap-4 border-t border-border pt-3 text-sm">
+                    <button
+                      onClick={() => setEditing(c)}
+                      className="font-medium text-accent hover:underline"
+                    >
+                      Edit
+                    </button>
+                    <button
+                      onClick={() => askDelete(c)}
+                      className="font-medium text-red-600 hover:underline"
+                    >
+                      Delete
+                    </button>
+                  </div>
+                </div>
               ))}
-            </tbody>
-          </table>
-        </div>
+            </div>
+          </>
+        )}
       </div>
     </div>
   );

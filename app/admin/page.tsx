@@ -58,12 +58,12 @@ function StatCard({
   return (
     <Link
       href={href}
-      className={`rounded-xl border p-5 transition-shadow hover:shadow-md ${
+      className={`rounded-xl border p-4 transition-shadow hover:shadow-md sm:p-5 ${
         accent ? "border-accent/40 bg-accent/5" : "border-border bg-white"
       }`}
     >
-      <p className="text-sm text-zinc-500">{label}</p>
-      <p className="mt-1 text-3xl font-bold">{value}</p>
+      <p className="text-xs text-zinc-500 sm:text-sm">{label}</p>
+      <p className="mt-1 text-2xl font-bold sm:text-3xl">{value}</p>
     </Link>
   );
 }
@@ -92,7 +92,7 @@ export default async function DashboardPage() {
         </Link>
       </div>
 
-      <div className="grid grid-cols-2 gap-4 lg:grid-cols-5">
+      <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-5">
         <StatCard label="Published" value={data.publishedCount} href="/admin/posts?status=published" />
         <StatCard label="Drafts" value={data.draftCount} href="/admin/posts?status=draft" />
         <StatCard label="Categories" value={data.categoryCount} href="/admin/categories" />

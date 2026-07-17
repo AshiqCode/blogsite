@@ -102,8 +102,10 @@ export default async function HealthPage() {
       </p>
 
       {/* Score cards */}
-      <div className="mb-8 grid gap-4 sm:grid-cols-3">
-        <ScoreCard label="Overall SEO health" score={overall} big />
+      <div className="mb-8 grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4">
+        <div className="col-span-2 sm:col-span-1">
+          <ScoreCard label="Overall SEO health" score={overall} big />
+        </div>
         <ScoreCard label="Content SEO (posts)" score={contentScore} />
         <ScoreCard label="Site setup" score={site.score} />
       </div>
@@ -250,11 +252,15 @@ function ScoreCard({
         ? "text-amber-700"
         : "text-red-700";
   return (
-    <div className={`rounded-xl border p-5 ${ring}`}>
-      <p className="text-sm font-medium text-zinc-600">{label}</p>
-      <p className={`mt-1 font-bold ${text} ${big ? "text-5xl" : "text-4xl"}`}>
+    <div className={`h-full rounded-xl border p-4 sm:p-5 ${ring}`}>
+      <p className="text-xs font-medium text-zinc-600 sm:text-sm">{label}</p>
+      <p
+        className={`mt-1 font-bold ${text} ${
+          big ? "text-4xl sm:text-5xl" : "text-3xl sm:text-4xl"
+        }`}
+      >
         {score}
-        <span className="text-xl">/100</span>
+        <span className="text-base sm:text-xl">/100</span>
       </p>
     </div>
   );

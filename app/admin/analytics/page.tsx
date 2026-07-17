@@ -48,20 +48,20 @@ export default async function AnalyticsPage() {
 
       {/* Google Analytics connection */}
       <div className="mb-6 rounded-xl border border-border bg-white p-5">
-        <div className="flex flex-wrap items-center justify-between gap-3">
-          <div className="flex items-center gap-3">
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex min-w-0 items-center gap-3">
             <span
-              className={`flex h-10 w-10 items-center justify-center rounded-full text-lg ${
+              className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-lg ${
                 gaId ? "bg-green-100 text-green-700" : "bg-amber-100 text-amber-700"
               }`}
             >
               {gaId ? "✓" : "!"}
             </span>
-            <div>
+            <div className="min-w-0">
               <p className="font-semibold">Google Analytics</p>
               {gaId ? (
                 <p className="text-sm text-zinc-500">
-                  Connected · <span className="font-mono">{gaId}</span>
+                  Connected · <span className="break-all font-mono">{gaId}</span>
                 </p>
               ) : (
                 <p className="text-sm text-zinc-500">
@@ -70,20 +70,20 @@ export default async function AnalyticsPage() {
               )}
             </div>
           </div>
-          <div className="flex gap-2">
+          <div className="flex shrink-0 flex-col gap-2 sm:flex-row">
             {gaId && (
               <a
                 href="https://analytics.google.com/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-white hover:bg-accent-hover"
+                className="rounded-lg bg-accent px-4 py-2 text-center text-sm font-semibold text-white hover:bg-accent-hover"
               >
                 Open Google Analytics ↗
               </a>
             )}
             <Link
               href="/admin/settings"
-              className="rounded-lg border border-border px-4 py-2 text-sm font-medium hover:bg-zinc-100"
+              className="rounded-lg border border-border px-4 py-2 text-center text-sm font-medium hover:bg-zinc-100"
             >
               Settings
             </Link>
@@ -114,7 +114,7 @@ export default async function AnalyticsPage() {
           </p>
         ) : (
           <div className="overflow-x-auto">
-          <table className="w-full min-w-[420px] text-sm">
+          <table className="w-full text-sm">
             <thead className="border-b border-border text-left text-xs uppercase tracking-wide text-zinc-500">
               <tr>
                 <th className="px-2 py-2">#</th>
@@ -154,9 +154,9 @@ export default async function AnalyticsPage() {
 
 function StatCard({ label, value }: { label: string; value: number | string }) {
   return (
-    <div className="rounded-xl border border-border bg-white p-5">
-      <p className="text-sm text-zinc-500">{label}</p>
-      <p className="mt-1 text-2xl font-bold">{value}</p>
+    <div className="rounded-xl border border-border bg-white p-4 sm:p-5">
+      <p className="text-xs text-zinc-500 sm:text-sm">{label}</p>
+      <p className="mt-1 text-xl font-bold sm:text-2xl">{value}</p>
     </div>
   );
 }
