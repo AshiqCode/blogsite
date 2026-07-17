@@ -117,7 +117,7 @@ export default async function DashboardPage() {
               <li key={p.id} className="flex items-center justify-between gap-3 py-3">
                 <Link
                   href={`/admin/posts/${p.id}/edit`}
-                  className="truncate text-sm font-medium hover:text-accent"
+                  className="min-w-0 truncate text-sm font-medium hover:text-accent"
                 >
                   {p.title}
                 </Link>
@@ -146,7 +146,9 @@ export default async function DashboardPage() {
             {data.recentComments.map((c) => (
               <li key={c.id} className="py-3">
                 <div className="flex items-center justify-between gap-2">
-                  <span className="text-sm font-medium">{c.author_name}</span>
+                  <span className="min-w-0 truncate text-sm font-medium">
+                    {c.author_name}
+                  </span>
                   <span
                     className={`shrink-0 rounded-full px-2 py-0.5 text-xs font-medium capitalize ${statusBadge[c.status]}`}
                   >
