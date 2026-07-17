@@ -1,9 +1,13 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import Script from "next/script";
 import "./globals.css";
 import { getSettings } from "@/lib/queries";
 import { siteUrl, absoluteUrl } from "@/lib/site";
 import { CookieConsent } from "@/components/CookieConsent";
+
+export const viewport: Viewport = {
+  themeColor: "#c25a37",
+};
 
 export async function generateMetadata(): Promise<Metadata> {
   const settings = await getSettings();
@@ -74,6 +78,15 @@ export default async function RootLayout({
 }>) {
   const settings = await getSettings();
 
+  // Social profile URLs strengthen the brand's knowledge-graph entity.
+  const sameAs = [
+    settings.social_twitter,
+    settings.social_facebook,
+    settings.social_instagram,
+    settings.social_github,
+    settings.social_linkedin,
+  ].filter((u): u is string => Boolean(u));
+
   // Site-wide structured data helps Google understand the site.
   const jsonLd = {
     "@context": "https://schema.org",
@@ -84,6 +97,8 @@ export default async function RootLayout({
         url: siteUrl(),
         name: settings.site_title,
         description: settings.tagline ?? undefined,
+        inLanguage: "en",
+        publisher: { "@id": `${siteUrl()}/#organization` },
         potentialAction: {
           "@type": "SearchAction",
           target: {
@@ -98,7 +113,10 @@ export default async function RootLayout({
         "@id": `${siteUrl()}/#organization`,
         name: settings.site_title,
         url: siteUrl(),
-        logo: settings.logo_url ?? undefined,
+        ...(settings.logo_url
+          ? { logo: { "@type": "ImageObject", url: settings.logo_url } }
+          : {}),
+        ...(sameAs.length ? { sameAs } : {}),
       },
     ],
   };

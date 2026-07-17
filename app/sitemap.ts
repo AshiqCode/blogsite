@@ -21,7 +21,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       await Promise.all([
         supabase
           .from("posts")
-          .select("slug, updated_at, published_at")
+          .select("slug, updated_at, published_at, featured_image")
           .eq("status", "published")
           .order("published_at", { ascending: false }),
         supabase.from("categories").select("slug"),
@@ -33,6 +33,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: new Date(p.updated_at ?? p.published_at ?? Date.now()),
       changeFrequency: "weekly",
       priority: 0.8,
+      ...(p.featured_image ? { images: [p.featured_image] } : {}),
     }));
 
     const categoryRoutes: MetadataRoute.Sitemap = (categories ?? []).map((c) => ({

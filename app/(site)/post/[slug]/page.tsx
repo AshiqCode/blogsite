@@ -74,6 +74,11 @@ export default async function PostPage({ params }: Props) {
   void trackView(slug);
 
   const shareUrl = absoluteUrl(`/post/${post.slug}`);
+  const wordCount = post.content
+    .replace(/<[^>]*>/g, " ")
+    .trim()
+    .split(/\s+/)
+    .filter(Boolean).length;
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -94,6 +99,33 @@ export default async function PostPage({ params }: Props) {
     mainEntityOfPage: { "@type": "WebPage", "@id": shareUrl },
     keywords: post.tags.map((t) => t.name).join(", ") || undefined,
     articleSection: post.category?.name,
+    wordCount,
+    inLanguage: "en",
+    url: shareUrl,
+  };
+
+  // Breadcrumb structured data (Home › Category › Post).
+  const breadcrumbItems = [
+    { name: "Home", url: absoluteUrl("/") },
+    ...(post.category
+      ? [
+          {
+            name: post.category.name,
+            url: absoluteUrl(`/category/${post.category.slug}`),
+          },
+        ]
+      : []),
+    { name: post.title, url: shareUrl },
+  ];
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: breadcrumbItems.map((item, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: item.name,
+      item: item.url,
+    })),
   };
 
   return (
@@ -102,6 +134,33 @@ export default async function PostPage({ params }: Props) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
+
+      {/* Visible breadcrumb trail */}
+      <nav
+        aria-label="Breadcrumb"
+        className="mb-6 flex flex-wrap items-center justify-center gap-1.5 text-xs font-semibold text-muted"
+      >
+        <Link href="/" className="hover:text-accent">
+          Home
+        </Link>
+        {post.category && (
+          <>
+            <span aria-hidden>/</span>
+            <Link
+              href={`/category/${post.category.slug}`}
+              className="hover:text-accent"
+            >
+              {post.category.name}
+            </Link>
+          </>
+        )}
+        <span aria-hidden>/</span>
+        <span className="text-foreground/60">{post.title}</span>
+      </nav>
       <div className="mb-8 text-center">
         {post.category ? (
           <Link
