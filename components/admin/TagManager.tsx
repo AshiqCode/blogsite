@@ -42,13 +42,21 @@ export function TagManager({
             </p>
           )}
           <div>
-            <label className="mb-1 block text-sm font-medium">Name</label>
+            <label className="mb-1 block text-sm font-medium">
+              {editing ? "Name" : "Name(s)"}
+            </label>
             <input
               name="name"
               required
               defaultValue={editing?.name ?? ""}
+              placeholder={editing ? "" : "tag1, tag2, tag3"}
               className="w-full rounded-lg border border-border px-3 py-2 text-sm outline-none focus:border-accent"
             />
+            {!editing && (
+              <p className="mt-1 text-xs text-zinc-500">
+                Add several at once — separate them with commas.
+              </p>
+            )}
           </div>
           <div>
             <label className="mb-1 block text-sm font-medium">

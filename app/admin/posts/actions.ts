@@ -120,16 +120,23 @@ export async function savePost(
       .insert(tagIds.map((tag_id) => ({ post_id: postId!, tag_id })));
   }
 
-  revalidatePath("/", "layout");
+  revalidatePublic();
   redirect("/admin/posts");
+}
+
+/** Revalidate everything a post change affects, including the sitemap & feed. */
+function revalidatePublic() {
+  revalidatePath("/", "layout"); // public pages
+  revalidatePath("/admin/posts"); // admin list
+  revalidatePath("/sitemap.xml"); // search-engine sitemap
+  revalidatePath("/feed.xml"); // RSS feed
 }
 
 export async function deletePost(id: string): Promise<void> {
   await requireAdmin();
   const supabase = await createClient();
   await supabase.from("posts").delete().eq("id", id);
-  revalidatePath("/", "layout");
-  revalidatePath("/admin/posts");
+  revalidatePublic();
 }
 
 export async function setPostStatus(
@@ -141,6 +148,5 @@ export async function setPostStatus(
   const patch: { status: PostStatus; published_at?: string } = { status };
   if (status === "published") patch.published_at = new Date().toISOString();
   await supabase.from("posts").update(patch).eq("id", id);
-  revalidatePath("/", "layout");
-  revalidatePath("/admin/posts");
+  revalidatePublic();
 }
