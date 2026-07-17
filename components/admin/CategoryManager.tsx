@@ -45,7 +45,7 @@ export function CategoryManager({
   }, [state.ok]);
 
   return (
-    <div className="grid gap-6 lg:grid-cols-3">
+    <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
       {/* Form */}
       <div className="lg:col-span-1">
         <form

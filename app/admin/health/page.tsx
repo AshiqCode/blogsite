@@ -142,7 +142,7 @@ export default async function HealthPage() {
       {/* Site setup checklist */}
       <section className="mb-8 rounded-xl border border-border bg-white p-5">
         <h2 className="mb-4 font-semibold">Site setup</h2>
-        <ul className="grid gap-x-6 gap-y-3 sm:grid-cols-2">
+        <ul className="grid grid-cols-1 gap-x-6 gap-y-3 sm:grid-cols-2">
           {site.checks.map((c) => (
             <li key={c.label} className="flex gap-3">
               <span className={`mt-0.5 font-bold ${dot[c.status]}`}>

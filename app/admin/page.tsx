@@ -100,7 +100,7 @@ export default async function DashboardPage() {
         <StatCard label="Total views" value={data.totalViews.toLocaleString()} href="/admin/posts" />
       </div>
 
-      <div className="mt-8 grid gap-6 lg:grid-cols-2">
+      <div className="mt-8 grid grid-cols-1 gap-6 lg:grid-cols-2">
         {/* Recent posts */}
         <section className="rounded-xl border border-border bg-white p-5">
           <div className="mb-4 flex items-center justify-between">

@@ -43,7 +43,7 @@ function Section({
   return (
     <fieldset className="rounded-xl border border-border bg-white p-5">
       <legend className="px-1 text-sm font-semibold">{title}</legend>
-      <div className="grid gap-4 sm:grid-cols-2">{children}</div>
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">{children}</div>
     </fieldset>
   );
 }
