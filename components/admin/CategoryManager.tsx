@@ -190,7 +190,9 @@ export function CategoryManager({
                       {counts[c.id] ?? 0} posts
                     </span>
                   </div>
-                  <p className="mt-1 font-mono text-xs text-zinc-500">{c.slug}</p>
+                  <p className="mt-1 break-all font-mono text-xs text-zinc-500">
+                    {c.slug}
+                  </p>
                   <div className="mt-3 flex gap-4 border-t border-border pt-3 text-sm">
                     <button
                       onClick={() => setEditing(c)}
