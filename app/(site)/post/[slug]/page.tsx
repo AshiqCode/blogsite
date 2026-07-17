@@ -139,33 +139,36 @@ export default async function PostPage({ params }: Props) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
 
-      {/* Visible breadcrumb trail */}
+      {/* Breadcrumb */}
       <nav
         aria-label="Breadcrumb"
-        className="mb-6 flex flex-wrap items-center justify-center gap-1.5 text-xs font-semibold text-muted"
+        className="mb-8 flex flex-wrap items-center justify-center gap-x-1.5 gap-y-1 text-xs font-medium text-muted"
       >
-        <Link href="/" className="hover:text-accent">
+        <Link href="/" className="transition-colors hover:text-accent">
           Home
         </Link>
         {post.category && (
           <>
-            <span aria-hidden>/</span>
+            <ChevronSep />
             <Link
               href={`/category/${post.category.slug}`}
-              className="hover:text-accent"
+              className="transition-colors hover:text-accent"
             >
               {post.category.name}
             </Link>
           </>
         )}
-        <span aria-hidden>/</span>
-        <span className="text-foreground/60">{post.title}</span>
+        <ChevronSep />
+        <span className="max-w-[24ch] truncate text-foreground/45 sm:max-w-[45ch]">
+          {post.title}
+        </span>
       </nav>
-      <div className="mb-8 text-center">
+
+      <header className="mb-10 text-center">
         {post.category ? (
           <Link
             href={`/category/${post.category.slug}`}
-            className="inline-flex items-center gap-2 rounded-full bg-accent-soft px-3.5 py-1 text-xs font-bold uppercase tracking-widest text-accent transition-colors hover:bg-accent hover:text-white"
+            className="inline-flex items-center rounded-full bg-accent-soft px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-accent transition-colors hover:bg-accent hover:text-white"
           >
             {post.category.name}
           </Link>
@@ -174,19 +177,59 @@ export default async function PostPage({ params }: Props) {
             Story
           </span>
         )}
-        <h1 className="mx-auto mt-4 max-w-2xl font-display text-4xl font-semibold leading-[1.12] tracking-tight sm:text-5xl">
+
+        <h1 className="mx-auto mt-5 max-w-2xl font-display text-4xl font-semibold leading-[1.1] tracking-tight sm:text-5xl">
           {post.title}
         </h1>
-        <div className="mt-5 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-sm font-semibold text-muted">
-          <span className="text-foreground">By {authorName}</span>
-          <span className="h-1 w-1 rounded-full bg-border-strong" aria-hidden />
-          <span>{formatDate(post.published_at)}</span>
-          <span className="h-1 w-1 rounded-full bg-border-strong" aria-hidden />
-          <span>{readingTime(post.content)}</span>
-          <span className="h-1 w-1 rounded-full bg-border-strong" aria-hidden />
-          <span>{post.views} views</span>
+
+        {post.excerpt && (
+          <p className="mx-auto mt-4 max-w-xl text-lg leading-relaxed text-muted">
+            {post.excerpt}
+          </p>
+        )}
+
+        {/* Author byline + meta */}
+        <div className="mt-7 flex items-center justify-center gap-3">
+          <div className="relative h-11 w-11 shrink-0 overflow-hidden rounded-full bg-accent-soft ring-2 ring-surface">
+            {author.avatar ? (
+              <Image
+                src={author.avatar}
+                alt={authorName}
+                fill
+                sizes="44px"
+                className="object-cover"
+              />
+            ) : (
+              <span className="flex h-full items-center justify-center font-display text-base font-semibold text-accent">
+                {authorName.charAt(0).toUpperCase()}
+              </span>
+            )}
+          </div>
+          <div className="text-left">
+            <p className="text-sm font-semibold leading-tight text-foreground">
+              {authorName}
+              {author.role ? (
+                <span className="font-normal text-muted"> · {author.role}</span>
+              ) : null}
+            </p>
+            <div className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-0.5 text-xs font-medium text-muted">
+              <span className="inline-flex items-center gap-1">
+                <CalendarIcon />
+                {formatDate(post.published_at)}
+              </span>
+              <span className="inline-flex items-center gap-1">
+                <ClockIcon />
+                {readingTime(post.content)}
+              </span>
+              <span className="inline-flex items-center gap-1">
+                <EyeIcon />
+                {post.views.toLocaleString()}{" "}
+                {post.views === 1 ? "view" : "views"}
+              </span>
+            </div>
+          </div>
         </div>
-      </div>
+      </header>
 
       {post.featured_image && (
         <div className="relative mb-10 aspect-[16/9] overflow-hidden rounded-[1.25rem] bg-surface-2 shadow-soft">
@@ -235,5 +278,74 @@ export default async function PostPage({ params }: Props) {
 
       <CommentSection postId={post.id} comments={comments} />
     </article>
+  );
+}
+
+/* --- small inline icons for the byline / breadcrumb --- */
+
+function ChevronSep() {
+  return (
+    <svg
+      className="h-3 w-3 text-border-strong"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.5"
+      strokeLinecap="round"
+      aria-hidden
+    >
+      <path d="m9 18 6-6-6-6" />
+    </svg>
+  );
+}
+
+function CalendarIcon() {
+  return (
+    <svg
+      className="h-3.5 w-3.5"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      aria-hidden
+    >
+      <rect x="3" y="4" width="18" height="18" rx="2" />
+      <path d="M16 2v4M8 2v4M3 10h18" />
+    </svg>
+  );
+}
+
+function ClockIcon() {
+  return (
+    <svg
+      className="h-3.5 w-3.5"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      aria-hidden
+    >
+      <circle cx="12" cy="12" r="9" />
+      <path d="M12 7v5l3 2" />
+    </svg>
+  );
+}
+
+function EyeIcon() {
+  return (
+    <svg
+      className="h-3.5 w-3.5"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      aria-hidden
+    >
+      <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z" />
+      <circle cx="12" cy="12" r="3" />
+    </svg>
   );
 }
